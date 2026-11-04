@@ -1,0 +1,45 @@
+/* 미디어 관리(v2) 페이지 전용 — 목록↔그리드 전환, 썸네일, 업로드 드롭존 상태. 토큰만 참조. */
+.nv-media-view[data-view="list"] .nv-media-grid { display: none; }
+.nv-media-view[data-view="grid"] .nv-media-table { display: none; }
+
+.nv-media-thumb {
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  width: 14rem; height: 10rem; border-radius: var(--cms-radius-sm);
+  background: var(--cms-surface-muted); color: var(--cms-border-strong);
+}
+.nv-media-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nv-media-thumb .nv-icon { width: 2.4rem; height: 2.4rem; }
+.nv-media-table tbody td { height: auto; padding-top: 1.2rem; padding-bottom: 1.2rem; }
+.nv-media-info { display: flex; flex-direction: column; gap: .4rem; min-width: 0; }
+.nv-media-info__name { font-weight: var(--cms-fw-medium); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 48rem; }
+.nv-media-info__meta { color: var(--cms-subtle); font-size: var(--cms-fs-md); }
+.nv-media-kind { color: var(--cms-muted); font-size: var(--cms-fs-base); white-space: nowrap; }
+
+/* 그리드 카드 (Figma 미디어 그리드: 4열, 썸네일 + 이름·메타 + 배지) */
+.nv-media-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem; }
+.nv-media-card {
+  display: flex; flex-direction: column; gap: 1.2rem; padding: 2rem;
+  background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius);
+}
+.nv-media-card[aria-selected="true"], .nv-media-card:focus-within { border-color: var(--cms-primary); }
+.nv-media-card__top { display: flex; align-items: center; justify-content: space-between; }
+.nv-media-card .nv-media-thumb { width: 100%; height: 19.4rem; }
+.nv-media-card__name { display: flex; align-items: baseline; gap: .8rem; min-width: 0; }
+.nv-media-card__name b { font-weight: var(--cms-fw-medium); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nv-media-card__name small { color: var(--cms-subtle); font-size: var(--cms-fs-sm); white-space: nowrap; }
+.nv-media-card__foot { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+.nv-media-card__meta { display: flex; gap: .8rem; color: var(--cms-muted); font-size: var(--cms-fs-md); }
+.nv-media-card__meta span + span::before { content: "|"; margin-right: .8rem; color: var(--cms-border-strong); }
+@media (max-width: 1600px) { .nv-media-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1024px) { .nv-media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 768px) { .nv-media-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* 업로드 폼 상태 문구 (legacy 스크립트 클래스 유지) */
+.cms-admin-uploader__status { min-height: 2rem; font-size: var(--cms-fs-md); color: var(--cms-muted); }
+.cms-admin-uploader__status--success { color: var(--cms-ok-fg); font-weight: var(--cms-fw-semibold); }
+.cms-admin-uploader__status--error { color: var(--cms-err-fg); font-weight: var(--cms-fw-semibold); }
+.nv-dropzone input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.nv-dropzone { position: relative; }
+
+/* 공통 CSS 의 `.nv-filter .nv-input--sm { width:auto }` 가 검색 input 을 wrap(20.5rem) 밖으로 키운다 → 이 페이지에서 보정(공통 보강 제안) */
+.nv-filter .nv-input-wrap .nv-input--sm { width: 100%; }

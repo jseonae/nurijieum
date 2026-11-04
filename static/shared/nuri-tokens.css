@@ -1,0 +1,252 @@
+/* =========================================================================
+   누리지음 UI v2 디자인 토큰 — 테마 "nuri"
+   출처: Figma [프로젝트]26-102CMS(누리지음) UIUX 분석 · 디자인 페이지 실측
+         (docs/design-system/figma-measured.json, 매핑 근거는 docs/design-system/README.md)
+   계층: Layer 0 KRDS(vendor/krds, 무수정) --krds-*  →  Layer 1 제품 토큰(이 파일) --cms-*
+         →  Layer 2 컴포넌트(admin-ui/v2/cms-admin-v2.css, shared/cms-design-system.css)
+   규칙:
+     - 기존 Layer 1 이름(--cms-bg, --cms-primary …)은 그대로 두고 값만 시안으로 바꾼다.
+       → 기존 Layer 2(cms-design-system.css)가 v2 에서도 동작한다.
+     - 값은 가능하면 KRDS 토큰을 참조한다. 시안의 Tailwind 계열 색(slate/blue)은
+       가장 가까운 KRDS 단계로 치환했고, 그 근거는 README 매핑표에 있다.
+     - 시안 고유값(헤더 네이비 #0033a9, 페이지 배경 #f6f8fc 등)은 KRDS 에 대응 단계가
+       없어 실측값을 그대로 쓴다. 이런 값은 주석에 "실측" 이라고 적는다.
+     - 단위: KRDS 와 같이 html 62.5% 기준 rem (1rem = 10px). 글자크기 토글(data-cms-fontscale)이 그대로 먹는다.
+   ========================================================================= */
+
+/* ---- 서체: KRDS 표준 Pretendard GOV 셀프호스팅(vendor/krds/fonts, 서브셋) ----
+   시안은 Pretendard 로 그려졌지만 KRDS 준수를 위해 GOV 판을 쓴다(자형 동일, 자간·굵기 미세 차이). */
+@font-face {
+  font-family: 'PretendardGOV';
+  src: url('../vendor/krds/fonts/PretendardGOV-Regular.subset.woff2') format('woff2'),
+       url('../vendor/krds/fonts/PretendardGOV-Regular.subset.woff') format('woff');
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: 'PretendardGOV';
+  src: url('../vendor/krds/fonts/PretendardGOV-Medium.subset.woff2') format('woff2'),
+       url('../vendor/krds/fonts/PretendardGOV-Medium.subset.woff') format('woff');
+  font-weight: 500; font-display: swap;
+}
+@font-face {
+  /* 시안 텍스트의 1/3 이 600(SemiBold). krds-uiux 1.1.0 에는 없어 pretendard v1.3.9 GOV 배포본(같은 서브셋 빌드)에서 추가 */
+  font-family: 'PretendardGOV';
+  src: url('../vendor/krds/fonts/PretendardGOV-SemiBold.subset.woff2') format('woff2'),
+       url('../vendor/krds/fonts/PretendardGOV-SemiBold.subset.woff') format('woff');
+  font-weight: 600; font-display: swap;
+}
+@font-face {
+  font-family: 'PretendardGOV';
+  src: url('../vendor/krds/fonts/PretendardGOV-Bold.subset.woff2') format('woff2'),
+       url('../vendor/krds/fonts/PretendardGOV-Bold.subset.woff') format('woff');
+  font-weight: 700; font-display: swap;
+}
+
+[data-theme="nuri"] {
+  /* ---- 서체 ---- */
+  --cms-font: 'PretendardGOV', 'Pretendard GOV', 'Pretendard', -apple-system, 'Malgun Gothic', sans-serif;
+  --cms-font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* 타이포 스케일 — 시안 실측(px) → rem. KRDS pc 스케일과 겹치는 단계는 참조.
+     xs 11 · sm 12 · md 13 · base 14 · lg 15 · xl 17 · h4 18 · h3 20 · h2 24 · h1 32 */
+  --cms-fs-xs:   1.1rem;
+  --cms-fs-sm:   1.2rem;
+  --cms-fs-md:   var(--krds-pc-font-size-body-xsmall, 1.3rem);
+  --cms-fs-base: 1.4rem;
+  --cms-fs-lg:   var(--krds-pc-font-size-body-small, 1.5rem);
+  --cms-fs-xl:   var(--krds-pc-font-size-body-medium, 1.7rem);
+  --cms-fs-h4:   1.8rem;
+  --cms-fs-h3:   2rem;
+  --cms-fs-h2:   var(--krds-pc-font-size-heading-medium, 2.4rem);
+  --cms-fs-h1:   var(--krds-pc-font-size-heading-large, 3.2rem);
+  --cms-lh-tight: 1.2;    /* 제목·배지·표 셀(시안 14/17, 12/14) */
+  --cms-lh-base:  1.45;   /* 본문(시안 14/20, 13/19) */
+  --cms-lh-loose: 1.6;    /* 긴 설명문 */
+  --cms-fw-regular: 400;
+  --cms-fw-medium:  500;
+  --cms-fw-semibold: 600;
+  --cms-fw-bold:    700;
+
+  /* ---- 간격: 4px 그리드. 시안 빈도 상위 4/8/12/16/20/24/32/40 ---- */
+  --cms-sp-1: var(--krds-number-3, 0.4rem);   /*  4 */
+  --cms-sp-2: var(--krds-number-5, 0.8rem);   /*  8 */
+  --cms-sp-3: var(--krds-number-7, 1.2rem);   /* 12 */
+  --cms-sp-4: var(--krds-number-8, 1.6rem);   /* 16 */
+  --cms-sp-5: var(--krds-number-9, 2rem);     /* 20 */
+  --cms-sp-6: var(--krds-number-10, 2.4rem);  /* 24 */
+  --cms-sp-8: var(--krds-number-12, 3.2rem);  /* 32 */
+  --cms-sp-10: var(--krds-number-14, 4rem);   /* 40 */
+
+  /* ---- 배경 / 표면 ---- */
+  --cms-bg:            #f6f8fc;                                   /* 실측: 콘텐츠 영역·패널 배경 */
+  --cms-surface:       var(--krds-color-light-gray-0, #ffffff);
+  --cms-surface-alt:   var(--krds-color-light-secondary-5, #eef2f7); /* 실측 #eef2f7 = secondary-5: thead·비활성 탭 */
+  --cms-surface-soft:  #f5faff;                                   /* 실측: 선택된 행 */
+  --cms-surface-muted: var(--krds-color-light-gray-5, #f4f5f6);   /* 실측 #f9fafb·#f2f4f6 → gray-5: 보조 버튼·hover 메뉴 */
+  --cms-border:        var(--krds-color-light-gray-10, #e6e8ea);  /* 실측 #e6e8ea = gray-10 (#e2e8f0·#e5e7eb 도 여기로) */
+  --cms-border-soft:   #f5f6f7;                                   /* 실측: 표 행 구분선 */
+  --cms-border-strong: var(--krds-color-light-gray-30, #b1b8be);  /* 실측 #b1b8be = gray-30: 입력 테두리·모달 테두리 */
+  --cms-border-accent: #afc8ed;                                   /* 실측: 대시보드 강조 카드 2px 테두리 */
+  --cms-border-card:   #e3eaf5;                                   /* 실측: 요약카드 테두리·그림자 색 */
+
+  /* ---- 글자색 ---- */
+  --cms-text:        var(--krds-color-light-gray-90, #1e2124);   /* 실측 #0f172a·#141a24·#1e2124 → gray-90 */
+  --cms-text-strong: var(--krds-color-light-gray-80, #33363d);   /* 실측 #33363d·#30343a = gray-80: 사이드바 항목 */
+  --cms-muted:       var(--krds-color-light-gray-70, #464c53);   /* 실측 #475569·#464c53 → gray-70: 설명·표 헤더 */
+  --cms-subtle:      var(--krds-color-light-gray-60, #58616a);   /* 실측 #94a3b8·#8a949e(gray-40, 흰 배경 3.1:1) → 페이지 배경(#f6f8fc) 위에서도 4.5:1 넘도록 gray-60 */
+  --cms-placeholder: var(--krds-color-light-gray-40, #8a949e);   /* 플레이스홀더·장식 텍스트만(비필수 정보) */
+  --cms-nav-group:   var(--krds-color-light-gray-50, #6d7882);   /* 실측 #a7b1bc(대비 2.2:1) → 접근성 위해 gray-50 */
+  --cms-on-dark:     #ffffff;
+  --cms-on-dark-muted: rgba(255, 255, 255, .78);   /* 실측 .6 → 헤더 네이비 위 4.5:1 확보 */
+
+  /* ---- 브랜드 / 프라이머리 ---- */
+  --cms-primary:        var(--krds-color-light-primary-50, #256ef4);  /* 실측 #2563eb·#256ef4 → primary-50 */
+  --cms-primary-strong: var(--krds-color-light-primary-60, #0b50d0);
+  --cms-primary-hover:  var(--krds-color-light-primary-60, #0b50d0);
+  --cms-primary-deep:   var(--krds-color-light-primary-70, #083891);  /* 실측 #083891 = primary-70: 활성 탭 */
+  --cms-primary-soft:   var(--krds-color-light-primary-5,  #ecf2fe);  /* 실측 #ecf2fe = primary-5: 보조 버튼 배경·nav 활성 */
+  --cms-primary-text:   var(--krds-color-light-primary-60, #0b50d0);  /* soft/페이지 배경 위 프라이머리 글자 — primary-50 은 4.05:1 로 AA 미달(axe) */
+  --cms-primary-tint:   #d0def7;                                      /* 실측: 대시보드 KPI 카드 배경 */
+  --cms-on-primary:     #ffffff;
+  --cms-header-bg:      #0033a9;                                      /* 실측: 헤더바·사이드바 로고 영역(브랜드 네이비) */
+  --cms-header-bg-deep: #03317a;                                      /* 실측: 로고 심볼·대시보드 KPI 카드 */
+  --cms-header-search-bg: rgba(255, 255, 255, .12);
+  --cms-header-chip-bg:   rgba(255, 255, 255, .20);
+  --cms-sidebar-bg:     var(--cms-surface);
+  --cms-sidebar-border: #e9ebf0;                                      /* 실측 */
+  --cms-nav-active-bg:  var(--cms-primary-soft);
+  --cms-nav-active-fg:  var(--cms-primary-text);
+  --cms-accent-violet:      var(--krds-color-light-secondary-50, #346fb2);
+  --cms-accent-violet-soft: var(--krds-color-light-secondary-5,  #eef2f7);
+  --cms-help-bg:     #f4fcf9;   /* 실측: 사이드바 하단 도움말 카드 */
+  --cms-help-border: #c5e8dc;
+  --cms-help-fg:     var(--krds-color-light-success-60, #267337);  /* 실측 #27c590(대비 2.1:1) → success-60(5.1:1) */
+
+  /* ---- 상태색 (배경/전경 쌍) — 시안 Tailwind 계열 → KRDS 시맨틱 ---- */
+  --cms-ok-bg:   var(--krds-color-light-success-5,  #eaf6ec);  /* 실측 #ecfdf5 */
+  --cms-ok-fg:   var(--krds-color-light-success-60, #267337);  /* 실측 #047857 */
+  --cms-warn-bg: var(--krds-color-light-warning-5,  #fff3db);  /* 실측 #fffbeb */
+  --cms-warn-fg: var(--krds-color-light-warning-60, #8a5c00);  /* 실측 #b45309 · warning-50 은 4.2:1 이라 60 사용 */
+  --cms-err-bg:  var(--krds-color-light-danger-5,   #fdefec);  /* 실측 #fdefec ✓ */
+  --cms-err-fg:  var(--krds-color-light-danger-60,  #bd2c0f);  /* 실측 #ef4444·#de3412 */
+  --cms-err-border: var(--krds-color-light-point-10, #f5d6d9); /* 실측 #f5d6d9 = point-10: 선택삭제 버튼 테두리 */
+  --cms-info-bg: var(--krds-color-light-information-5,  #e7f4fe);
+  --cms-info-fg: var(--krds-color-light-information-60, #096ab3); /* 실측 #0b78cb(information-50, 4.1:1) → 60 */
+  --cms-gray-bg: var(--krds-color-light-gray-5,  #f4f5f6);     /* 실측 #f1f5f9: 임시저장·비활성 배지 */
+  --cms-gray-fg: var(--krds-color-light-gray-70, #464c53);
+  /* 차트(대시보드 게이지) — 시안 실측 그라데이션. 운영중 #8fc2ff→#3783f5 · 중지 #b3c2ff→#9188f5 · 점검대상 #f5a45f→#ffd08a
+     KRDS 에 보라 계열이 없어 중지는 실측값을 그대로 둔다(정보 전달은 범례 텍스트가 담당, 대비 요건 비적용 장식색) */
+  --cms-chart-active-a:    var(--krds-color-light-primary-30, #8fc2ff);
+  --cms-chart-active-b:    var(--krds-color-light-primary-50, #256ef4);
+  --cms-chart-inactive-a:  #b3c2ff;
+  --cms-chart-inactive-b:  #9188f5;
+  --cms-chart-attention-a: var(--krds-color-light-warning-30, #ffb114);
+  --cms-chart-attention-b: var(--krds-color-light-warning-20, #ffd08a);
+  --cms-chart-track:       var(--krds-color-light-gray-20, #e6e8ea);
+  --cms-live-dot: #00ffab;                                      /* 실측: 헤더 알림 점 */
+
+  /* ---- 형태 ---- */
+  --cms-radius-xs: .4rem;    /* 4  배지·페이지 번호·select */
+  --cms-radius-sm: .6rem;    /* 6  버튼·입력·보조 카드 */
+  --cms-radius:    .8rem;    /* 8  카드·nav 항목·폼 그룹·드롭메뉴 */
+  --cms-radius-md: 1rem;     /* 10 탭 */
+  --cms-radius-lg: 1.2rem;   /* 12 요약카드·모달·표 카드 */
+  --cms-radius-xl: 1.6rem;   /* 16 대시보드 카드 */
+  --cms-radius-2xl: 2.4rem;  /* 24 슬라이드 패널 좌측 모서리 */
+  --cms-radius-pill: 100rem;
+  --cms-shadow-sm:   0 1px 2px rgba(0, 0, 0, .05);
+  --cms-shadow:      0 4px 8px rgba(0, 0, 0, .08), 0 0 2px rgba(0, 0, 0, .05);   /* 실측: 상단 이동 버튼 */
+  --cms-shadow-lg:   0 4px 16px rgba(0, 0, 0, .05);                              /* 실측: 드롭메뉴 */
+  --cms-shadow-card: 6px 4px 12.5px rgba(227, 234, 245, .5);                     /* 실측: 요약카드 */
+  --cms-shadow-modal: 0 16px 24px rgba(0, 0, 0, .12), 0 0 2px rgba(0, 0, 0, .08);
+  --cms-shadow-panel: -8px 0 24px rgba(16, 28, 69, .10);
+  --cms-focus:       0 0 0 3px rgba(37, 110, 244, .45);   /* KRDS 포커스 링 규격(3px, primary 45%) */
+
+  /* ---- 앱셸 치수 (시안 1920 기준) ---- */
+  --cms-header-h:   6.6rem;    /* 66 — 기존 이름 재사용(legacy 9rem 자리) */
+  --cms-sidebar-w:  24rem;     /* 240 */
+  --cms-panel-w:    47.6rem;   /* 476 슬라이드 패널 */
+  --cms-panel-w-lg: 51.6rem;   /* 516 회원·직원 패널 */
+  --cms-content-px: 3.8rem;    /* 38 좌우 */
+  --cms-content-py: 3.2rem;    /* 32 상하 */
+  --cms-content-max: 160.4rem; /* 1604 콘텐츠 폭 */
+  --cms-control-h:   3.4rem;   /* 34 필터 입력·select */
+  --cms-control-h-lg: 4rem;    /* 40 폼 입력 */
+  --cms-button-h:    3.2rem;   /* 32 필터 버튼 */
+  --cms-button-h-lg: 4.8rem;   /* 48 패널·모달 버튼 */
+  --cms-row-h:       5rem;     /* 50 표 행 */
+  --cms-thead-h:     4.4rem;   /* 44 표 헤더 */
+
+  /* ---- 하위호환 alias(기존 Layer 2 가 참조) ---- */
+  --cms-admin-bg: var(--cms-bg);
+  --cms-admin-surface: var(--cms-surface);
+  --cms-admin-surface-alt: var(--cms-surface-alt);
+  --cms-admin-surface-soft: var(--cms-surface-soft);
+  --cms-admin-border: var(--cms-border);
+  --cms-admin-border-strong: var(--cms-border-strong);
+  --cms-admin-text: var(--cms-text);
+  --cms-admin-muted: var(--cms-muted);
+  --cms-admin-primary: var(--cms-primary);
+  --cms-admin-primary-soft: var(--cms-primary-soft);
+  --cms-admin-success: var(--cms-ok-fg);
+  --cms-admin-danger: var(--cms-err-fg);
+  --cms-admin-warning: var(--cms-warn-fg);
+  --cms-admin-focus: var(--cms-primary);
+  --cms-admin-accent-primary: var(--cms-primary);
+  --cms-admin-accent-success: var(--cms-ok-fg);
+  --cms-admin-accent-warning: var(--cms-warn-fg);
+  --cms-admin-accent-danger: var(--cms-err-fg);
+  --cms-admin-accent-info: var(--cms-primary-strong);
+}
+
+/* ---- 고대비: KRDS 네이티브 [data-krds-mode="high-contrast"] 재사용. v2 는 legacy cms-admin.css 를 읽지 않으므로
+   Layer 1 스왑을 여기서 직접 한다(legacy 블록과 같은 시맨틱 토큰). ---- */
+[data-theme="nuri"][data-krds-mode="high-contrast"] {
+  --cms-bg:            var(--krds-high-contrast-color-background-white,        #000000);
+  --cms-surface:       var(--krds-high-contrast-color-background-gray-subtle,  #1e2124);
+  --cms-surface-alt:   var(--krds-high-contrast-color-background-gray-subtler, #131416);
+  --cms-surface-soft:  var(--krds-high-contrast-color-background-gray-subtle,  #1e2124);
+  --cms-surface-muted: var(--krds-high-contrast-color-background-gray-subtler, #131416);
+  --cms-border:        var(--krds-high-contrast-color-border-gray,             #464c53);
+  --cms-border-soft:   var(--krds-high-contrast-color-border-gray,             #464c53);
+  --cms-border-strong: var(--krds-high-contrast-color-border-gray-light,       #33363d);
+  --cms-border-accent: var(--krds-color-high-contrast-primary-40, #4c87f6);
+  --cms-border-card:   var(--krds-high-contrast-color-border-gray,             #464c53);
+  --cms-text:          var(--krds-high-contrast-color-text-basic,              #f4f5f6);
+  --cms-text-strong:   var(--krds-high-contrast-color-text-basic,              #f4f5f6);
+  --cms-muted:         var(--krds-high-contrast-color-text-basic,              #f4f5f6);
+  --cms-subtle:        var(--krds-color-light-gray-20, #cdd1d5);
+  --cms-nav-group:     var(--krds-color-light-gray-20, #cdd1d5);
+  --cms-primary:        var(--krds-color-high-contrast-primary-40, #4c87f6);
+  --cms-primary-strong: var(--krds-color-high-contrast-primary-30, #86aff9);
+  --cms-primary-text:   var(--krds-color-high-contrast-primary-30, #86aff9);
+  --cms-primary-hover:  var(--krds-color-high-contrast-primary-30, #86aff9);
+  --cms-primary-deep:   var(--krds-color-high-contrast-primary-40, #4c87f6);
+  --cms-primary-soft:   var(--krds-high-contrast-color-background-gray-subtle, #1e2124);
+  --cms-primary-tint:   var(--krds-high-contrast-color-background-gray-subtle, #1e2124);
+  --cms-nav-active-fg:  var(--krds-color-high-contrast-primary-30, #86aff9);
+  --cms-header-bg:      #000000;
+  --cms-header-bg-deep: #000000;
+  --cms-sidebar-border: var(--krds-high-contrast-color-border-gray, #464c53);
+  --cms-help-bg:     var(--krds-high-contrast-color-background-gray-subtle, #1e2124);
+  --cms-help-border: var(--krds-high-contrast-color-border-gray, #464c53);
+  --cms-accent-violet:      var(--krds-color-high-contrast-primary-30, #86aff9);
+  --cms-accent-violet-soft: var(--krds-high-contrast-color-background-gray-subtle, #1e2124);
+  --cms-chart-active-a:    var(--krds-color-high-contrast-primary-30, #86aff9);
+  --cms-chart-active-b:    var(--krds-color-high-contrast-primary-40, #4c87f6);
+  --cms-chart-inactive-a:  var(--krds-color-high-contrast-gray-50, #8a949e);
+  --cms-chart-inactive-b:  var(--krds-color-high-contrast-gray-60, #6d7882);
+  --cms-chart-attention-a: var(--krds-color-high-contrast-warning-30, #ffb114);
+  --cms-chart-attention-b: var(--krds-color-high-contrast-warning-40, #c78500);
+  --cms-chart-track:       var(--krds-color-high-contrast-gray-80, #33363d);
+  --cms-shadow-card: none;
+  --cms-focus:   0 0 0 3px var(--krds-color-high-contrast-primary-40, #4c87f6);
+  /* 상태 칩(--cms-*-bg/fg)은 밝은 tint 칩이라 어두운 배경에서도 가독성 유지 → 그대로 둔다 */
+}
+@media (prefers-contrast: more) {
+  [data-theme="nuri"] {
+    --cms-border: var(--krds-color-light-gray-60, #58616a);
+    --cms-muted:  var(--krds-color-light-gray-90, #1e2124);
+    --cms-subtle: var(--krds-color-light-gray-70, #464c53);
+  }
+}

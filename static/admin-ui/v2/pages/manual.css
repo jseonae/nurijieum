@@ -1,0 +1,33 @@
+/* 사용자 매뉴얼 v2 — 페이지 전용 (토큰만 참조) */
+.mn-doc { display: flex; gap: var(--cms-sp-4); align-items: flex-start; border-left: 4px solid var(--cms-primary); }
+.mn-doc--gray { border-left-color: var(--cms-border-strong); }
+.mn-doc__icon { width: 4.8rem; height: 4.8rem; flex: none; border-radius: var(--cms-radius-lg); background: var(--cms-primary-soft); color: var(--cms-primary-text); display: inline-flex; align-items: center; justify-content: center; }
+.mn-doc--gray .mn-doc__icon { background: var(--cms-surface-alt); color: var(--cms-muted); }
+.mn-doc__title { font-size: var(--cms-fs-lg); font-weight: var(--cms-fw-semibold); margin-bottom: .4rem; }
+
+.mn-layout { display: grid; grid-template-columns: 28rem minmax(0, 1fr); gap: var(--cms-sp-6); align-items: start; }
+.mn-toc { position: sticky; top: calc(var(--cms-header-h) + var(--cms-sp-6)); max-height: calc(100vh - var(--cms-header-h) - var(--cms-sp-6) * 2); overflow-y: auto; }
+.mn-toc__group { display: flex; flex-direction: column; gap: .2rem; }
+.mn-toc__label { font-size: var(--cms-fs-sm); font-weight: var(--cms-fw-semibold); color: var(--cms-nav-group); margin-bottom: .4rem; }
+.mn-toc__link { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .7rem 1rem; border-radius: var(--cms-radius-sm); color: var(--cms-text-strong); font-size: var(--cms-fs-base); }
+.mn-toc__link:hover { background: var(--cms-surface-muted); }
+.mn-toc__link[aria-current="page"] { background: var(--cms-nav-active-bg); color: var(--cms-nav-active-fg); font-weight: var(--cms-fw-semibold); }
+.mn-toc__link--feature { font-size: var(--cms-fs-md); padding: .5rem 1rem; }
+.mn-toc__link small { font-size: var(--cms-fs-xs); }
+
+.mn-role { display: flex; flex-direction: column; gap: var(--cms-sp-3); padding: var(--cms-sp-5); border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); background: var(--cms-surface); }
+.mn-role--primary { border-color: var(--cms-border-accent); background: var(--cms-primary-soft); }
+.mn-role--ok { border-color: var(--cms-help-border); background: var(--cms-help-bg); }
+.mn-role__avatar { width: 3.6rem; height: 3.6rem; border-radius: 50%; background: var(--cms-primary); color: var(--cms-on-primary); font-weight: var(--cms-fw-bold); display: inline-flex; align-items: center; justify-content: center; }
+.mn-role--ok .mn-role__avatar { background: var(--cms-ok-fg); }
+.mn-role__title { font-size: var(--cms-fs-lg); font-weight: var(--cms-fw-semibold); }
+.mn-role__list { display: flex; flex-direction: column; gap: .6rem; font-size: var(--cms-fs-md); }
+.mn-role__list li { display: flex; align-items: flex-start; gap: .6rem; }
+.mn-role__list .nv-icon { color: var(--cms-ok-fg); margin-top: .2rem; }
+.mn-role__foot { margin-top: auto; padding-top: var(--cms-sp-3); border-top: 1px solid var(--cms-border); }
+
+.mn-note { display: flex; flex-direction: column; gap: .8rem; padding: var(--cms-sp-4); border: 1px solid var(--cms-border); border-radius: var(--cms-radius); background: var(--cms-surface-muted); }
+.mn-main .nv-table-scroll { padding: 0 var(--cms-sp-6) var(--cms-sp-6); }
+.mn-main .nv-card__head { padding-bottom: var(--cms-sp-4); margin-bottom: var(--cms-sp-4); }
+.mn-main section { scroll-margin-top: calc(var(--cms-header-h) + var(--cms-sp-4)); }
+@media (max-width: 1280px) { .mn-layout { grid-template-columns: minmax(0, 1fr); } .mn-toc { position: static; max-height: none; } }

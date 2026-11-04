@@ -1,0 +1,110 @@
+/* 메뉴 관리(v2) 페이지 전용 — 메뉴 깊이 표시, 인라인 편집 행, 연결 대상 입력, 메뉴 등록 폼. 토큰만 참조. */
+
+/* 메뉴명: 깊이 원형 번호 + 들여쓰기 (Figma 메뉴 리스트) */
+.nv-nav-menu { display: inline-flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+.nv-nav-menu--d2 { padding-left: 2.4rem; }
+.nv-nav-menu--d3 { padding-left: 4.8rem; }
+.nv-nav-menu--d4 { padding-left: 7.2rem; }
+.nv-nav-menu__depth {
+  display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; flex: none;
+  border-radius: 50%; background: var(--cms-primary); color: var(--cms-on-primary);
+  font-size: var(--cms-fs-xs); font-weight: var(--cms-fw-semibold);
+}
+.nv-nav-menu--d2 .nv-nav-menu__depth, .nv-nav-menu--d3 .nv-nav-menu__depth, .nv-nav-menu--d4 .nv-nav-menu__depth { background: var(--cms-primary-soft); color: var(--cms-primary-strong); }
+.nv-nav-menu__path { width: 100%; padding-left: 2.8rem; color: var(--cms-subtle); font-size: var(--cms-fs-sm); font-weight: var(--cms-fw-regular); }
+.nv-nav-table tbody td.is-title { font-weight: var(--cms-fw-medium); }
+/* KRDS common.css 가 table { table-layout: fixed } 를 전역으로 걸어 col-actions(width:1%) 가 16px 로 눌린다 → 내용 기반 배치 */
+.nv-nav-table { table-layout: auto; }
+.nv-nav-table .col-actions { width: 6.4rem; }
+.nv-nav-table .col-check { width: 3.2rem; }
+
+/* 행 아래 인라인 편집 영역 */
+.nv-nav-edit-row td { background: var(--cms-surface-soft); padding-top: 1.6rem; padding-bottom: 1.6rem; height: auto; }
+.nv-nav-edit { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.6rem 2.4rem; }
+.nv-nav-edit__form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1.2rem; flex: 1 1 48rem; }
+.nv-nav-edit__form .nv-field { flex: 1 1 16rem; gap: .4rem; }
+.nv-nav-edit__form .nv-field__label { font-size: var(--cms-fs-sm); color: var(--cms-muted); }
+.nv-nav-edit__form--inline { flex: 1 1 auto; }
+.nv-nav-edit__actions { display: flex; align-items: flex-end; }
+.nv-nav-edit__side { display: flex; align-items: center; gap: .8rem; margin-left: auto; }
+.nv-nav-edit__close { flex: none; }
+
+/* 대상 유형별 입력(하나만 표시) */
+.nv-route-target { display: flex; align-items: center; gap: .8rem; width: 100%; }
+.nv-route-target > .nv-select { flex: 1; }
+.nv-route-target__url { display: flex; align-items: center; gap: .8rem; flex: 1; }
+.nv-route-target__url > .nv-input { flex: 1; }
+.nv-route-target [hidden] { display: none !important; }
+/* 연결 대상 「게시판」 줄(#35): 고르기 칸이 남는 폭을 채우고 [추가] [수정] [삭제] 는 오른쪽 */
+.nv-route-target > [data-board-row] { align-self: stretch; }
+.nv-route-target [data-board-row] > .nv-select { flex: 1; }
+
+/* 메뉴 등록 폼 (Figma 820:53598): 편집 헤더 + 2열(본문 카드 / 설정 컬럼) */
+.nv-nav-form { border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); background: var(--cms-bg); overflow: hidden; scroll-margin-top: calc(var(--cms-header-h) + 1.6rem); }
+.nv-nav-form[hidden] { display: none !important; }
+.nv-nav-form__inner { display: flex; flex-direction: column; }
+.nv-nav-form__header { position: static; margin: 0; }
+.nv-nav-form__grid { display: grid; grid-template-columns: minmax(0, 1fr) 42rem; gap: var(--cms-sp-6); padding: var(--cms-sp-6); }
+.nv-nav-form__grid .nv-card { border-radius: var(--cms-radius-lg); }
+@media (max-width: 1280px) { .nv-nav-form__grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 768px) { .nv-nav-edit__side { margin-left: 0; } .nv-nav-menu--d2, .nv-nav-menu--d3, .nv-nav-menu--d4 { padding-left: 1.2rem; } }
+
+/* 편집 모드(Figma 820:53598/53660): 메뉴 등록 폼이 열리면 페이지 헤더·목록을 숨겨 편집 화면만 남긴다 */
+.nv-content:has(.nv-nav-form:not([hidden])) > .nv-page-header,
+#panel-menu:has(.nv-nav-form:not([hidden])) > .nv-list { display: none; }
+.nv-content:has(.nv-nav-form:not([hidden])) .nv-nav-form { border: 0; background: transparent; overflow: visible; }
+.nv-content:has(.nv-nav-form:not([hidden])) .nv-nav-form__header {
+  margin: calc(var(--cms-content-py) * -1) calc(var(--cms-content-px) * -1) 0; padding-left: var(--cms-content-px); padding-right: var(--cms-content-px);
+  background: var(--cms-surface); border-bottom: 1px solid var(--cms-border);
+}
+.nv-content:has(.nv-nav-form:not([hidden])) .nv-nav-form__grid { padding: var(--cms-sp-6) 0 0; }
+/* 시안: 본문 카드 흰색 · 라벨 14/600 · 입력 40 */
+.nv-nav-form__grid .nv-card { background: var(--cms-surface); }
+.nv-nav-form__grid .nv-field__label { font-size: var(--cms-fs-base); font-weight: var(--cms-fw-semibold); }
+
+/* 메뉴 등록 · 수정 링크 줄: [현재창 ▾] 은 좁게, 주소 · URL 칸이 나머지 */
+.nv-nav-link-target { flex: none; width: 10rem; }
+
+/* 메뉴 일괄 등록 패널(Figma 820:57323): 서식 링크 · 열 설명 · 결과표 */
+/* 메뉴 일괄 등록 패널: 오른쪽에 붙어 세로 가운데(오른쪽에서 밀려 나옴) · 기본 폭(476) · 높이는 내용만큼(화면을 넘으면 본문
+   스크롤). 등록 완료 결과표는 넓은 폭(516) */
+#menu-bulk-panel {
+  top: 50%; bottom: auto; max-height: calc(100vh - 4rem);
+  border-radius: var(--cms-radius-2xl) 0 0 var(--cms-radius-2xl); transform: translate(100%, -50%);
+}
+#menu-bulk-panel.is-open { transform: translate(0, -50%); }
+#menu-bulk-panel[data-bulk-mode="done"] { width: var(--cms-panel-w-lg); }
+.nv-nav-bulk-tpl { display: flex; flex-direction: column; gap: .8rem; }
+.nv-nav-bulk-tpl__links { display: flex; flex-wrap: nowrap; gap: .8rem; }
+.nv-nav-bulk-tpl__links .nv-btn { white-space: nowrap; }
+.nv-nav-bulk-help { border: 1px solid var(--cms-border); border-radius: var(--cms-radius-sm); padding: .8rem 1.2rem; }
+.nv-nav-bulk-help summary { cursor: pointer; font-size: var(--cms-fs-sm); color: var(--cms-muted); }
+.nv-nav-bulk-help ul { margin: .8rem 0 0; padding-left: 1.6rem; display: flex; flex-direction: column; gap: .4rem; }
+.nv-nav-bulk-report h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: .8rem; margin: 0 0 .8rem; }
+/* 드롭존 안 파일 입력: 화면에서는 숨기고(라벨 전체가 클릭 영역) 키보드 초점은 드롭존 테두리로 보인다 — 미디어 등록과 같은 방식 */
+#menu-bulk-drop { position: relative; }
+#menu-bulk-drop input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+#menu-bulk-drop:focus-within { outline: 2px solid var(--cms-primary); outline-offset: 2px; }
+.nv-nav-bulk-table { table-layout: auto; width: 100%; }
+.nv-nav-bulk-table tbody td { height: auto; vertical-align: top; padding-top: 1rem; padding-bottom: 1rem; }
+.nv-nav-bulk-table tr.is-error td { background: var(--cms-err-bg); }
+.nv-nav-bulk-cell { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.nv-nav-bulk-name { font-weight: var(--cms-fw-medium); overflow-wrap: anywhere; }
+.nv-nav-bulk-path { overflow-wrap: anywhere; color: var(--cms-muted); }
+.nv-nav-bulk-table .nv-text-err { color: var(--cms-err-fg); overflow-wrap: anywhere; }
+
+/* 메뉴코드: 코드 없는 메뉴 안내 줄(일괄 부여 버튼) · 새 콘텐츠 페이지 경로 미리보기 · 상위 변경 안내 */
+.nv-nav-code-missing { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; }
+.nv-nav-code-missing__text { flex: 1 1 32rem; }
+.nv-nav-page-preview { margin: 0; overflow-wrap: anywhere; }
+.nv-nav-form .nv-text-warn { color: var(--cms-warn-fg); }
+.nv-nav-form .nv-text-err { color: var(--cms-err-fg); }
+.nv-nav-code-missing__note { display: block; margin-top: .2rem; font-size: var(--cms-fs-sm); }
+/* 일괄 등록: 전부 변화 없음 안내 */
+.nv-nav-bulk-same { margin: 0 0 .8rem; padding: .8rem 1.2rem; border-radius: var(--cms-radius-sm); background: var(--cms-surface-muted); color: var(--cms-text); }
+.nv-nav-bulk-other { margin-top: .8rem; }
+/* 일괄 등록 오류 알림: 요약 아래 행별 오류(행 · 메뉴코드 · 사유) — 많으면 알림 안에서 스크롤 */
+.nv-nav-bulk-alert > div { min-width: 0; flex: 1; }
+.nv-nav-bulk-alert p { margin: 0; }
+.nv-nav-bulk-errors { margin: .8rem 0 0; padding-left: 1.6rem; max-height: 32rem; overflow-y: auto; display: flex; flex-direction: column; gap: .4rem; font-size: var(--cms-fs-sm); overflow-wrap: anywhere; }
+.nv-nav-bulk-errors code { margin: 0 .4rem; }

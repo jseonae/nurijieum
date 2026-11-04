@@ -1,0 +1,94 @@
+/* 팝업존 관리 v2 페이지 전용 스타일. 토큰(--cms-*)만 참조.
+   popup-image-picker.js 가 잡는 클래스(.cms-admin-popup-image-strip*, .cms-admin-mediapicker*)는
+   마크업을 그대로 두고 여기서 v2 톤으로 다시 그린다(legacy cms-admin.css 는 v2 에서 로드되지 않음). */
+
+/* ---- 등록/수정 폼 레이아웃: 좌 폼 카드 + 우 설정 컬럼 (Figma 팝업존 등록) ---- */
+.pp-form { display: grid; grid-template-columns: minmax(0, 1fr) 42rem; gap: var(--cms-sp-6); align-items: start; }
+.pp-form__main { display: flex; flex-direction: column; gap: var(--cms-sp-5); padding: var(--cms-sp-6); background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); }
+.pp-form__side { display: flex; flex-direction: column; gap: var(--cms-sp-4); }
+.pp-form__head { display: flex; align-items: center; gap: var(--cms-sp-3); padding: var(--cms-sp-4) var(--cms-sp-6); background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); }
+.pp-form__head h2 { font-size: var(--cms-fs-h4); font-weight: var(--cms-fw-bold); }
+.pp-form__head-desc { color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.pp-form__head-actions { margin-left: auto; display: flex; gap: var(--cms-sp-2); }
+.pp-panel { display: flex; flex-direction: column; gap: var(--cms-sp-4); }
+.pp-period { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--cms-sp-2); }
+.pp-link-row { display: grid; grid-template-columns: 12rem minmax(0, 1fr) auto; gap: var(--cms-sp-2); }
+.pp-switch-row { display: flex; align-items: center; justify-content: space-between; }
+@media (max-width: 1280px) { .pp-form { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- 미리보기 카드 ---- */
+.cms-admin-popup-preview-panel__stage { display: flex; align-items: center; justify-content: center; min-height: 34rem; padding: var(--cms-sp-6); background: var(--cms-surface-alt); border-radius: var(--cms-radius); }
+.cms-admin-popup-preview-card { width: 20rem; background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius-sm); box-shadow: var(--cms-shadow); overflow: hidden; }
+.cms-admin-popup-preview-card__img-wrap { aspect-ratio: 1 / 1; background: var(--cms-surface-muted); display: flex; align-items: center; justify-content: center; }
+.cms-admin-popup-preview-card__img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cms-admin-popup-preview-card__img-placeholder { color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.cms-admin-popup-preview-card__body { display: flex; flex-direction: column; gap: .6rem; padding: 1.2rem; }
+.cms-admin-popup-preview-card__title { font-size: var(--cms-fs-md); font-weight: var(--cms-fw-semibold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cms-admin-popup-preview-card__footer { display: flex; border-top: 1px solid var(--cms-border); font-size: var(--cms-fs-xs); color: var(--cms-muted); }
+.cms-admin-popup-preview-card__footer span { flex: 1; padding: .6rem; text-align: center; }
+.cms-admin-popup-preview-card__footer span + span { border-left: 1px solid var(--cms-border); }
+
+/* ---- 이미지 스트립 ---- */
+.cms-admin-popup-image-strip { display: flex; flex-wrap: wrap; gap: var(--cms-sp-3); }
+.cms-admin-popup-image-strip__item { position: relative; width: 12rem; aspect-ratio: 4 / 3; border: 2px solid var(--cms-border); border-radius: var(--cms-radius-sm); overflow: hidden; background: var(--cms-surface-muted); }
+.cms-admin-popup-image-strip__item--rep { border-color: var(--cms-primary); }
+.cms-admin-popup-image-strip__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cms-admin-popup-image-strip__badge { position: absolute; left: .4rem; top: .4rem; padding: .2rem .6rem; border-radius: var(--cms-radius-xs); background: var(--cms-primary); color: var(--cms-on-primary); font-size: var(--cms-fs-xs); font-weight: var(--cms-fw-semibold); }
+.cms-admin-popup-image-strip__rep-btn { position: absolute; left: .4rem; bottom: .4rem; padding: .2rem .6rem; border: 0; border-radius: var(--cms-radius-xs); background: var(--cms-surface); color: var(--cms-primary-text); font-size: var(--cms-fs-xs); font-weight: var(--cms-fw-semibold); cursor: pointer; opacity: 0; box-shadow: var(--cms-shadow-sm); }
+.cms-admin-popup-image-strip__item:hover .cms-admin-popup-image-strip__rep-btn,
+.cms-admin-popup-image-strip__item:focus-within .cms-admin-popup-image-strip__rep-btn { opacity: 1; }
+.cms-admin-popup-image-strip__del-btn { position: absolute; right: .4rem; top: .4rem; width: 2.2rem; height: 2.2rem; border: 0; border-radius: 50%; background: var(--cms-surface); color: var(--cms-muted); cursor: pointer; box-shadow: var(--cms-shadow-sm); line-height: 1; }
+.cms-admin-popup-image-strip__del-btn:hover { color: var(--cms-err-fg); }
+.cms-admin-popup-image-strip__add { width: 12rem; aspect-ratio: 4 / 3; flex-shrink: 0; }
+.cms-admin-popup-image-strip__add-btn { width: 100%; height: 100%; border: 1.5px dashed var(--cms-border-strong); border-radius: var(--cms-radius-sm); background: var(--cms-surface); color: var(--cms-subtle); font-size: var(--cms-fs-h2); cursor: pointer; }
+.cms-admin-popup-image-strip__add-btn:hover, .cms-admin-popup-image-strip__add-btn:focus-visible { border-color: var(--cms-primary); color: var(--cms-primary-text); background: var(--cms-primary-soft); }
+/* 그림별 대체 텍스트 칸(popup-image-picker.js 가 썸네일 줄 아래에 만든다) */
+.cms-admin-popup-image-alts { list-style: none; margin: var(--cms-sp-3) 0 0; padding: 0; display: grid; gap: var(--cms-sp-2); }
+.cms-admin-popup-image-alts__item { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: var(--cms-sp-2); align-items: center; }
+.cms-admin-popup-image-alts__label { color: var(--cms-muted); font-size: var(--cms-fs-sm); }
+.cms-admin-popup-image-alts__input { width: 100%; min-height: 3.6rem; padding: 0 var(--cms-sp-3); border: 1px solid var(--cms-border-strong); border-radius: var(--cms-radius-sm); background: var(--cms-surface); color: var(--cms-text); font: inherit; }
+.cms-admin-popup-image-alts__input:focus-visible { outline: 2px solid var(--cms-primary); outline-offset: 1px; }
+@media (max-width: 768px) { .cms-admin-popup-image-alts__item { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- 목록 썸네일 ---- */
+.pp-thumb { width: 7rem; aspect-ratio: 7 / 9;   /* 시안 820:52348 미리보기 셀 약 70×88 */ border-radius: var(--cms-radius-sm); background: var(--cms-surface-muted); border: 1px solid var(--cms-border); display: flex; align-items: center; justify-content: center; color: var(--cms-subtle); overflow: hidden; }
+.pp-thumb img, .cms-admin-popup-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nv-table tbody tr.pp-row td { height: auto; padding-top: 1.6rem; padding-bottom: 1.6rem; }
+
+/* ---- 미디어 피커 모달 (popup-image-picker.js) ---- */
+.cms-admin-mediapicker { position: fixed; inset: 0; z-index: 75; display: flex; align-items: center; justify-content: center; padding: var(--cms-sp-4); background: rgba(15, 23, 42, .45); }
+.cms-admin-mediapicker[hidden] { display: none; }
+.cms-admin-mediapicker__dialog { width: min(96rem, 100%); max-height: calc(100vh - 3.2rem); display: flex; flex-direction: column; background: var(--cms-surface); border: 1px solid var(--cms-border-strong); border-radius: var(--cms-radius-lg); box-shadow: var(--cms-shadow-modal); color: var(--cms-text); }
+.cms-admin-mediapicker__header { display: flex; align-items: center; justify-content: space-between; padding: var(--cms-sp-5) var(--cms-sp-6); border-bottom: 1px solid var(--cms-border); }
+.cms-admin-mediapicker__title { font-size: var(--cms-fs-h3); font-weight: var(--cms-fw-bold); }
+.cms-admin-mediapicker__close { width: 3.2rem; height: 3.2rem; border: 0; border-radius: var(--cms-radius-sm); background: none; color: var(--cms-text); font-size: var(--cms-fs-h3); cursor: pointer; }
+.cms-admin-mediapicker__close:hover { background: var(--cms-surface-muted); }
+.cms-admin-mediapicker__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: var(--cms-sp-3); padding: var(--cms-sp-6); overflow-y: auto; }
+.cms-admin-mediapicker__loading, .cms-admin-mediapicker__empty { grid-column: 1 / -1; padding: var(--cms-sp-8); text-align: center; color: var(--cms-muted); }
+.cms-admin-mediapicker__empty--error { color: var(--cms-err-fg); }
+.cms-admin-mediapicker__item { display: flex; flex-direction: column; gap: .6rem; padding: .8rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius); background: var(--cms-surface); cursor: pointer; text-align: left; }
+.cms-admin-mediapicker__item:hover, .cms-admin-mediapicker__item:focus-visible { border-color: var(--cms-primary); background: var(--cms-primary-soft); }
+.cms-admin-mediapicker__thumb { aspect-ratio: 4 / 3; border-radius: var(--cms-radius-xs); background: var(--cms-surface-muted); overflow: hidden; }
+.cms-admin-mediapicker__thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cms-admin-mediapicker__item-name { font-size: var(--cms-fs-md); font-weight: var(--cms-fw-medium); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cms-admin-mediapicker__item-meta { font-size: var(--cms-fs-xs); color: var(--cms-subtle); }
+
+/* hidden 속성 우선(display 를 준 요소에서도 숨김) */
+.pp-panel[hidden], .cms-admin-popup-preview-card [hidden], .cms-admin-popup-image-strip [hidden] { display: none !important; }
+/* 필터 우측 폭 조정(날짜 2 + 노출여부 + 검색 + 버튼이 1604 안에 들어가도록) */
+.nv-list .nv-filter .nv-date-range .nv-input--sm { width: 12rem; }
+.nv-list .nv-filter .nv-input-wrap { width: 17rem; }
+.nv-table .pp-thumb-cell { width: 9rem; }
+.nv-table .pp-period-cell { white-space: normal; min-width: 18rem; }
+
+/* ---- 등록 화면 열림: 시안(820:52092)처럼 폼이 페이지 전체를 차지 — 목록·페이지 헤더 숨김, 폼 헤더 sticky ---- */
+.nv-content:has(.pp-panel:not([hidden])) > .nv-page-header,
+.nv-content:has(.pp-panel:not([hidden])) > .nv-list,
+.nv-content:has(.pp-panel:not([hidden])) > .nv-alert { display: none; }
+.nv-content:has(.pp-panel:not([hidden])) { padding-top: 0; }
+#popup-create-panel:not([hidden]) > .pp-form__head {
+  position: sticky; top: var(--cms-header-h); z-index: 20;
+  margin: 0 calc(var(--cms-content-px) * -1); padding: 1.6rem var(--cms-content-px);
+  background: var(--cms-surface); border-bottom: 1px solid var(--cms-border);
+}
+#popup-create-panel:not([hidden]) .pp-form__head-desc { display: none; }

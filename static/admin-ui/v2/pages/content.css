@@ -1,0 +1,134 @@
+/* 콘텐츠 관리 v2 페이지 전용 스타일. 토큰(--cms-*)만 참조. 공통 컴포넌트는 cms-admin-v2.css 에 있다.
+   여기서 정의하는 것: 편집 화면 2열 그리드, 표 안 인라인 상세 행, 라이브 프리뷰 에디터(content-editor.js 훅),
+   버전 작업 버튼 묶음, details 팝, 미디어 삽입 모달(content-media-picker.js 훅). */
+
+/* ---- 편집 화면: 본문 + 우측 설정 컬럼 (Figma 820:50523 / 820:50441). 수정은 ?contentId= 전체 화면, 등록은 reveal ---- */
+.nv-editor-page { display: flex; flex-direction: column; gap: var(--cms-sp-6); }
+.nv-editor-page[hidden] { display: none; }
+.nv-editor-page__grid { display: grid; grid-template-columns: minmax(0, 1fr) 42rem; gap: var(--cms-sp-6); align-items: start; }
+/* 편집 헤더(공통 .nv-editor-header 는 콘텐츠 영역 밖으로 음수 margin + sticky). 상태 문구는 액션 앞에 */
+.ct-edit .nv-editor-header { margin-bottom: 0; }
+.ct-edit .nv-editor-header__title { font-size: var(--cms-fs-h4); }
+.ct-edit .nv-editor-header__status { margin-left: auto; }
+.ct-edit .nv-editor-header__actions { margin-left: 0; }
+.ct-hidden-form { display: none; }
+/* 본문 카드(시안: 제목 라벨 12 → 제목 24/700 밑줄 → 툴바 → 본문). 본문은 시안처럼 길게 */
+.ct-editor { padding: var(--cms-sp-8) var(--cms-sp-8) var(--cms-sp-6); min-height: 72rem; }
+.ct-editor .nv-editor__title { font-size: var(--cms-fs-h2); font-weight: var(--cms-fw-bold); padding: .4rem 0 1.2rem; }
+.ct-editor .cms-admin-editor__split { min-height: 52rem; }
+.ct-editor .cms-admin-editor__pane .nv-editor__body { min-height: 50rem; border: 0; padding: .4rem 0; font-family: var(--cms-font); font-size: var(--cms-fs-lg); line-height: 1.7; background: transparent; }
+.ct-editor .cms-admin-editor__pane .nv-editor__body:read-only { color: var(--cms-muted); }
+.ct-editor .cms-admin-editor__preview { min-height: 50rem; }
+.ct-editor .nv-editor__toolbar { background: var(--cms-surface-muted); border-color: var(--cms-border); }
+.ct-editor .cms-admin-editor__pane-label:not(.nv-sr-only) { margin-top: .4rem; }
+/* 우측 설정 카드: 시안 라벨 14/600, 라디오 목록 간격 8 */
+.ct-edit .nv-form-group { gap: var(--cms-sp-3); }
+.ct-edit .nv-form-group .nv-choice-list { gap: .8rem; }
+.ct-publish-action { padding-top: .4rem; border-top: 1px solid var(--cms-border-soft); }
+.ct-publish-action[hidden] { display: none !important; }
+.ct-title-link { font-weight: var(--cms-fw-medium); color: var(--cms-text); }
+.ct-title-link:hover { color: var(--cms-primary-text); }
+.nv-table--versions tr.is-selected th, .nv-table--versions tr.is-selected td { background: var(--cms-surface-soft); }
+.nv-editor-page__side { display: flex; flex-direction: column; gap: var(--cms-sp-6); }
+.nv-editor-header--inline { position: static; margin: 0; border-radius: var(--cms-radius-lg); border: 1px solid var(--cms-border); flex-wrap: wrap; }
+.nv-editor-header--inline .nv-editor-header__actions { margin-left: auto; }
+.nv-editor-header--inline form { display: inline-flex; }
+.nv-editor__label { font-size: var(--cms-fs-md); color: var(--cms-subtle); }
+@media (max-width: 1280px) { .nv-editor-page__grid { grid-template-columns: minmax(0, 1fr); } }
+
+.nv-table--content td.is-title { max-width: 52rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---- ZIP 반입 패널(목록 「ZIP 반입」) ---- */
+.ct-import__table td { vertical-align: top; }
+.ct-import__table td.nv-mono { max-width: 24rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ct-import__row--error td { background: var(--cms-err-bg, transparent); }
+.ct-import__row--skip td { color: var(--cms-muted); }
+/* 반입 패널은 결과표(경로 · 콘텐츠 · 동작 · 사유 / 부가 파일 5열)가 들어가도록 넓게 */
+#content-import-panel { width: min(112rem, 100vw); }
+.ct-nowrap { white-space: nowrap; }
+.ct-import__confirm { display: inline-flex; align-items: center; gap: .6rem; margin-top: var(--cms-sp-3); font-weight: var(--cms-fw-bold, 600); }
+.ct-import__files .nv-alert { margin-bottom: var(--cms-sp-3); }
+/* 부가 파일(목록 아래 구획) */
+.ct-site-files { margin-top: var(--cms-sp-8); }
+.ct-site-files__desc { margin: 0; padding: 1.6rem 2.6rem 0; }
+.nv-table--site-files td.nv-mono { max-width: 36rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* 전체 선택 확장 안내(이 쪽 N건 → 검색 결과 전체 M건). 버튼은 링크 모양 */
+.ct-select-matching { margin: 1.6rem 2.6rem 0; align-items: center; }
+.ct-select-matching__btn { padding: 0; border: 0; background: none; font: inherit; font-weight: var(--cms-fw-bold, 600); color: inherit; text-decoration: underline; text-underline-offset: .2rem; cursor: pointer; }
+.ct-select-matching__btn:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* ---- 상세(contentDetail): 풀페이지 폴백에서도 카드로 보이게 ---- */
+.nv-detail { display: flex; flex-direction: column; gap: var(--cms-sp-6); }
+.nv-content > .nv-detail { padding: var(--cms-sp-6); background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); }
+.nv-detail__grid { grid-template-columns: minmax(0, 1fr) 40rem; }
+.nv-dl--plain { grid-template-columns: 9rem minmax(0, 1fr); border-top: 0; }
+.nv-dl--plain dt { background: none; padding: .4rem 0; border-bottom: 0; font-size: var(--cms-fs-sm); }
+.nv-dl--plain dd { padding: .4rem 0; border-bottom: 0; word-break: break-all; }
+.nv-details__summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: .8rem; }
+.nv-details__summary::-webkit-details-marker { display: none; }
+.nv-details__summary::after { content: ""; margin-left: auto; width: .7rem; height: .7rem; border-right: 1.5px solid var(--cms-subtle); border-bottom: 1.5px solid var(--cms-subtle); transform: rotate(45deg); transition: transform .15s; }
+details[open] > .nv-details__summary::after { transform: rotate(-135deg); }
+.nv-details > summary.nv-btn { list-style: none; }
+.nv-details > summary.nv-btn::-webkit-details-marker { display: none; }
+.nv-details--inline { display: inline-block; position: relative; }
+.nv-details--inline .nv-details__pop {
+  position: absolute; left: 0; top: calc(100% + .4rem); z-index: 20; padding: 1rem; white-space: nowrap;
+  background: var(--cms-surface); border: 1px solid var(--cms-border-strong); border-radius: var(--cms-radius); box-shadow: var(--cms-shadow-lg);
+}
+.nv-details--block { display: block; flex-basis: 100%; }
+.nv-details--block .nv-details__pop { margin-top: 1.2rem; padding: 1.6rem; background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius); }
+.nv-version-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.nv-version-actions form { display: inline-flex; }
+.nv-table--versions th[scope="row"] { font-weight: var(--cms-fw-semibold); color: var(--cms-text); text-align: left; }
+.nv-table--versions tbody td { height: auto; }
+.nv-text-err { color: var(--cms-err-fg); }
+
+/* ---- 라이브 프리뷰 에디터 (content-editor.js: data-view=edit|split|preview) ---- */
+.nv-editor--flat { padding: 0; border: 0; border-radius: 0; background: transparent; }
+.cms-admin-editor__split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--cms-sp-4); min-height: 40rem; }
+.cms-admin-editor[data-view="edit"] .cms-admin-editor__split { grid-template-columns: minmax(0, 1fr); }
+.cms-admin-editor[data-view="edit"] .cms-admin-editor__pane--preview { display: none; }
+.cms-admin-editor[data-view="preview"] .cms-admin-editor__split { grid-template-columns: minmax(0, 1fr); }
+.cms-admin-editor[data-view="preview"] .cms-admin-editor__pane--edit { display: none; }
+.cms-admin-editor__pane { display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.cms-admin-editor__pane-label { font-size: var(--cms-fs-xs); font-weight: var(--cms-fw-semibold); color: var(--cms-subtle); letter-spacing: .04em; text-transform: uppercase; }
+.cms-admin-editor__pane .nv-editor__body { flex: 1; min-height: 36rem; padding: 1.2rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius-sm); background: var(--cms-surface); font-family: var(--cms-font-mono); font-size: var(--cms-fs-md); }
+.cms-admin-editor__preview { flex: 1; min-height: 36rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius-sm); background: var(--cms-surface); overflow: hidden; }
+.cms-admin-editor__preview:empty::before { content: "본문을 입력하면 발행 결과와 같은 미리보기가 표시됩니다."; display: block; padding: 1.2rem; color: var(--cms-placeholder); font-size: var(--cms-fs-md); }
+.nv-editor__toolbar .nv-select--sm { width: auto; height: 3rem; }
+.nv-editor__toolbar .nv-segment { margin-left: auto; }
+.cms-admin-editor__live:empty { display: none; }
+@media (max-width: 1024px) { .cms-admin-editor__split { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- 미디어 삽입 모달 (content-media-picker.js: hidden/aria-hidden 토글, 아이템은 JS 가 생성) ---- */
+.cms-admin-mediapicker { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1.6rem; background: rgba(15, 23, 42, .45); }
+.cms-admin-mediapicker[hidden] { display: none; }
+.cms-admin-mediapicker__dialog { width: min(76rem, 100%); max-height: min(80vh, 64rem); }
+.cms-admin-mediapicker__header { padding: 2.4rem 3.2rem 1.6rem; border-bottom: 1px solid var(--cms-border); }
+.cms-admin-mediapicker__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1.2rem; align-content: start; padding: 1.6rem 3.2rem 2.4rem; overflow-y: auto; }
+.cms-admin-mediapicker__loading, .cms-admin-mediapicker__empty { grid-column: 1 / -1; margin: 2.4rem 0; text-align: center; color: var(--cms-muted); font-size: var(--cms-fs-base); }
+.cms-admin-mediapicker__empty--error { color: var(--cms-err-fg); }
+.cms-admin-mediapicker__item { display: flex; flex-direction: column; width: 100%; padding: 0; overflow: hidden; text-align: left; cursor: pointer; background: var(--cms-surface); border: 1px solid var(--cms-border); border-radius: var(--cms-radius); transition: border-color .15s, box-shadow .15s; }
+.cms-admin-mediapicker__item:hover, .cms-admin-mediapicker__item:focus-visible { border-color: var(--cms-primary); box-shadow: var(--cms-focus); outline: none; }
+.cms-admin-mediapicker__thumb { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 3; background: var(--cms-surface-alt); border-bottom: 1px solid var(--cms-border); overflow: hidden; }
+.cms-admin-mediapicker__thumb-img { width: 100%; height: 100%; object-fit: cover; }
+.cms-admin-mediapicker__kind-label { color: var(--cms-muted); font-size: var(--cms-fs-base); font-weight: var(--cms-fw-bold); letter-spacing: .04em; }
+.cms-admin-mediapicker__item-name { display: block; padding: .6rem .8rem .2rem; font-size: var(--cms-fs-sm); font-weight: var(--cms-fw-semibold); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--cms-text); }
+.cms-admin-mediapicker__item-meta { display: block; padding: 0 .8rem .6rem; font-size: var(--cms-fs-xs); color: var(--cms-muted); }
+
+/* KRDS component.css 가 input[type=search] 에 고정 폭을 주므로 래퍼 폭을 따르게 한다 (공통 보강 후보) */
+.nv-filter input[type="search"].nv-input { width: 100%; }
+.nv-editor__toolbar .nv-btn { width: auto; height: 3rem; padding: 0 1rem; border-radius: var(--cms-radius-xs); }
+.nv-editor__toolbar .nv-btn--ghost:hover { background: var(--cms-primary-soft); color: var(--cms-primary-text); }
+.nv-table--content .col-actions { width: 8.4rem; }
+/* display:flex 컴포넌트가 hidden 속성을 이기지 못하게 (reveal 패널) — 공통 보강 후보 */
+.cms-admin-reveal[hidden], .nv-form-group[hidden] { display: none !important; }
+/* 버전 표: 앞 3열은 내용폭, 작업 열이 나머지를 차지해 본문 수정 에디터가 넓게 펼쳐진다 */
+.nv-table--versions th:nth-child(1), .nv-table--versions td:nth-child(1) { width: 5.6rem; }
+.nv-table--versions th:nth-child(2), .nv-table--versions td:nth-child(2) { white-space: nowrap; }
+.nv-table--versions th:nth-child(2) small { margin-left: .4rem; }
+.nv-table--versions tbody th, .nv-table--versions tbody td { vertical-align: middle; padding: .8rem 1rem; }
+.nv-table--versions .nv-version-actions { gap: .4rem; justify-content: flex-end; }
+
+/* ---- 등록 화면 열림(공통 §17 규칙이 목록·페이지 헤더를 숨기고 편집 헤더를 sticky 로) ---- */
+#content-create-panel .cms-admin-editor__textarea, #content-create-panel .cms-admin-editor__preview { min-height: 50rem; }

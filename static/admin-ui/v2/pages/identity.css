@@ -1,0 +1,22 @@
+/* 권한 관리 v2 페이지 전용 (토큰만 참조) — 공통은 cms-admin-v2.css */
+.id-tabpanel { margin-top: var(--cms-sp-6); }
+.id-tabpanel[hidden] { display: none !important; }
+.id-switch-form, .id-inline-form { display: inline-flex; align-items: center; margin: 0; }
+.id-switch-form .nv-switch { gap: 0; }
+/* 권한관리 하위 화면 헤더: 역할명은 연한 색으로, "권한 관리" 는 본문색(Figma 820:56275) */
+.id-subhead { padding-top: var(--cms-sp-2); }
+.id-subhead__role { color: var(--cms-subtle); font-weight: var(--cms-fw-bold); margin-right: .6rem; }
+.id-subhead .nv-page-header__desc.is-code { font-family: var(--cms-font-mono); }
+/* 데드레터 접이식 카드 */
+.id-deadletter > summary { list-style: none; cursor: pointer; }
+.id-deadletter > summary::-webkit-details-marker { display: none; }
+.id-deadletter[open] > summary .nv-icon { transform: rotate(180deg); }
+.id-deadletter > summary .nv-icon { transition: transform .15s; color: var(--cms-muted); }
+.id-deadletter .nv-table-wrap { padding: var(--cms-sp-4) var(--cms-sp-6) var(--cms-sp-6); }
+/* 패널 폼: 패널 안에서 body 가 스크롤, foot 고정 */
+.id-panel-form { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.id-panel-form .nv-panel__body { flex: 1; }
+/* KRDS common.css 가 table 에 table-layout:fixed 를 주므로 공통 .col-actions{width:1%} 가 글자 그대로 1% 가 된다 →
+   이 페이지는 auto 레이아웃으로 되돌려 작업 컬럼이 내용 폭을 갖게 한다(공통 보강 제안: .nv-table { table-layout:auto }) */
+.id-tabpanel .nv-table, .id-deadletter .nv-table { table-layout: auto; }
+.id-tabpanel .nv-table .col-actions { width: auto; min-width: 8rem; }

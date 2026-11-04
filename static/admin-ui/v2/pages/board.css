@@ -1,0 +1,82 @@
+/* 게시판 관리 v2 페이지 전용 스타일 (토큰만 참조). 공통 컴포넌트는 cms-admin-v2.css */
+
+/* reveal 대상은 display 를 덮어쓰므로 hidden 속성을 명시적으로 존중 */
+.bd-page[hidden], .bd-qna [hidden] { display: none !important; }
+
+/* 게시판 목록: 게시판명은 일반 텍스트(선택 행만 primary) */
+.bd-table tr[aria-selected="true"] td.is-title { color: var(--cms-primary-text); }
+/* 패널의 "제목 + 스위치" 한 줄 행(820:57331 사용여부) */
+.bd-switch-row { flex-direction: row; align-items: center; justify-content: space-between; }
+
+/* 게시글 관리 (Figma 820:51731) */
+.bd-posts-header .nv-page-header__title { font-size: var(--cms-fs-h2); }
+.bd-summary { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.bd-summary .nv-summary__item { min-height: 11rem; padding: 1.8rem 2.4rem; }
+@media (max-width: 1280px) { .bd-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.bd-post-table td.is-title { max-width: 70rem; }
+.bd-post-link { border: 0; background: none; padding: 0; font: inherit; font-weight: var(--cms-fw-medium); color: inherit; text-align: left; cursor: pointer; }
+.bd-post-link:hover { color: var(--cms-primary-text); }
+
+/* 게시글 등록·수정·상세 전체 화면 (820:50870 / 52010 / 51667): 편집 헤더 + 본문 카드 + 우측 설정 컬럼 */
+.bd-page { display: flex; flex-direction: column; gap: var(--cms-sp-6); }
+.bd-page__grid { display: grid; grid-template-columns: minmax(0, 1fr) 42rem; gap: var(--cms-sp-6); align-items: start; }
+@media (max-width: 1280px) { .bd-page__grid { grid-template-columns: minmax(0, 1fr); } }
+.bd-page__main { padding: var(--cms-sp-8); min-height: 60rem; }
+.bd-page__main .nv-editor__title { font-size: var(--cms-fs-h2); padding: .4rem 0 1.2rem; }
+.bd-page__main .nv-editor__toolbar { gap: .8rem; }
+.bd-page__main .nv-editor__body { min-height: 44rem; padding: 1.2rem 0; border: 0; resize: vertical; }
+.bd-page__side .nv-form-group { padding: var(--cms-sp-5); }
+.bd-page__side .nv-field__hint { line-height: 1.5; }
+.bd-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--cms-sp-4); }
+.cms-admin-editor[data-view="edit"] .bd-split { grid-template-columns: minmax(0, 1fr); }
+.cms-admin-editor[data-view="edit"] .cms-admin-editor__pane--preview { display: none; }
+.cms-admin-editor[data-view="preview"] .bd-split { grid-template-columns: minmax(0, 1fr); }
+.cms-admin-editor[data-view="preview"] .cms-admin-editor__pane--edit { display: none; }
+.cms-admin-editor__pane { display: flex; flex-direction: column; gap: .6rem; min-width: 0; }
+.bd-preview { min-height: 44rem; padding: 1rem 1.2rem; border: 1px dashed var(--cms-border-strong); border-radius: var(--cms-radius-sm); background: var(--cms-surface); font-size: var(--cms-fs-base); line-height: var(--cms-lh-loose); overflow: auto; }
+.bd-meta { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: .6rem 1.2rem; font-size: var(--cms-fs-md); }
+.bd-meta dt { color: var(--cms-subtle); } .bd-meta dd { margin: 0; }
+.bd-code { min-height: 28rem; font-size: var(--cms-fs-md); line-height: 1.5; }
+
+/* 상세 읽기 카드 (820:51667) */
+.bd-view { display: flex; flex-direction: column; gap: var(--cms-sp-4); padding: var(--cms-sp-10) var(--cms-sp-10) var(--cms-sp-8); border-radius: var(--cms-radius-xl); }
+.bd-view__board { padding-left: 1rem; border-left: 3px solid var(--cms-primary); color: var(--cms-primary-text); font-size: var(--cms-fs-base); font-weight: var(--cms-fw-semibold); }
+.bd-view__title { font-size: var(--cms-fs-h2); font-weight: var(--cms-fw-bold); line-height: 1.3; padding-bottom: var(--cms-sp-4); border-bottom: 1px solid var(--cms-border); }
+.bd-view__meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem 2.4rem; padding-bottom: var(--cms-sp-4); border-bottom: 1px solid var(--cms-border); font-size: var(--cms-fs-base); }
+.bd-view__meta div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: .8rem; }
+.bd-view__meta dt { color: var(--cms-muted); } .bd-view__meta dd { margin: 0; }
+.bd-view__body { min-height: 16rem; font-size: var(--cms-fs-lg); line-height: var(--cms-lh-loose); word-break: keep-all; overflow-wrap: anywhere; }
+.bd-view__body :where(img, video, table) { max-width: 100%; }
+
+/* QNA 답변 영역 (e2e 훅 .cms-admin-qna* 유지) */
+.bd-qna { display: flex; flex-direction: column; gap: var(--cms-sp-3); padding: var(--cms-sp-5); border-top: 1px solid var(--cms-border); border-radius: var(--cms-radius); background: var(--cms-surface-soft); }
+.bd-qna__title { display: inline-flex; align-items: center; gap: .6rem; font-size: var(--cms-fs-base); font-weight: var(--cms-fw-semibold); color: var(--cms-text); }
+.bd-qna__list { display: flex; flex-direction: column; gap: .8rem; }
+.bd-qna__item { padding: 1.2rem 1.6rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius); background: var(--cms-surface); font-size: var(--cms-fs-base); line-height: var(--cms-lh-base); }
+.bd-qna__meta { display: flex; align-items: center; gap: .6rem; margin-top: .8rem; color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.bd-qna__meta form { margin-left: auto; }
+.nv-panel__form { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+
+/* 게시글 편집 — 공공누리 · 첨부파일(첨부·표지) (lje/nurijieum#28) */
+.bd-kogl .nv-select,
+.bd-kogl .nv-input { width: 100%; }
+.bd-kogl-cell { white-space: nowrap; }
+
+/* 예약 게시(adm_1504-04 · adm_1503-04) */
+.bd-schedule { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.2rem; }
+.bd-schedule .nv-btn { align-self: flex-start; }
+.bd-sched-at { display: block; margin-top: .2rem; white-space: nowrap; }
+
+/* 게시판 「권한」 패널 — 공개 누리집 · 관리자 권한(역할 × 칸) · 담당자 계정(docs/permissions.md) */
+.bd-perm { display: flex; flex-direction: column; gap: var(--cms-sp-3); }
+.bd-perm__rule { margin: 0; padding: 0; border: 0; min-width: 0; display: flex; flex-direction: column; gap: .8rem; }
+.bd-perm__roles { padding: 1rem 1.2rem; border-radius: var(--cms-radius); background: var(--cms-surface-soft); }
+.bd-perm__table td.col-check { white-space: nowrap; }
+.bd-perm__mark { margin-left: .2rem; font-size: var(--cms-fs-sm); }
+.bd-perm__table th[scope="row"] code { display: block; }
+.bd-perm__actions { flex-wrap: wrap; }
+
+/* 기본정보(자료실형) — 발행기관 · 발행연도 한 줄(adm_1504-03) */
+.bd-biblio__row { display: grid; grid-template-columns: 1fr 9rem; gap: .8rem; }
+.bd-biblio__cell { display: flex; flex-direction: column; gap: .4rem; }
+#board-perm-panel { width: min(96rem, 100vw); }   /* 역할 × 5칸 표가 잘리지 않게 — 기본 큰 패널보다 넓게 */

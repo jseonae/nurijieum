@@ -1,0 +1,39 @@
+/* 공통코드 관리 v2 페이지 전용 (토큰만 참조). 공통 컴포넌트는 cms-admin-v2.css */
+
+/* 인라인 상세(colspan 셀)가 표 폭을 밀어내지 않도록 고정 레이아웃 + 열 폭 */
+#cd-group-table, .cd-code-table { table-layout: fixed; }
+.cd-col-num { width: 6rem; } .cd-col-code { width: 18%; } .cd-col-scope { width: 14%; } .cd-col-usage { width: 12%; }
+.cd-col-sort { width: 12rem; } .cd-col-status { width: 10rem; } .cd-col-actions { width: 8rem; }
+#cd-group-table td, .cd-code-table td { overflow-wrap: anywhere; }
+
+/* 그룹 행 트리거(인라인 상세 펼침) */
+.nv-table tbody tr.cd-group-row[hidden] { display: none; }
+
+/* 인라인 상세 주입 행: 비어 있으면 높이 0 */
+
+/* 코드 관리 상세 (Figma 820:55438): 헤더(브레드크럼·제목·배지·상태 스위치·목록으로) + 목록 카드 */
+.cd-detail { display: flex; flex-direction: column; gap: var(--cms-sp-5); padding: 0; }
+.cd-detail__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--cms-sp-4); }
+.cd-detail__title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cms-sp-3); font-size: var(--cms-fs-h2); font-weight: var(--cms-fw-bold); line-height: 1.2; letter-spacing: -.02em; }
+.cd-detail__list { background: var(--cms-surface); }
+.cd-detail__list .nv-table-wrap { padding: var(--cms-sp-4) 2.6rem 2.6rem; }
+.cd-code-table tbody tr { outline: 1px solid var(--cms-border); outline-offset: -1px; }
+.cd-code-table tbody tr[aria-selected="true"] { outline-color: var(--cms-primary); }
+.cd-code-table tbody td { border-bottom: 0; }
+.cd-code-table tbody tr + tr td { border-top: .8rem solid var(--cms-surface); }   /* 시안: 카드형 행 간격 */
+
+/* 상태 스위치 폼(즉시 제출) */
+.cd-status-form { display: inline-flex; align-items: center; }
+.cd-status-form .nv-switch { gap: .8rem; font-size: var(--cms-fs-base); }
+.cd-switch-row { justify-content: space-between; }
+.cd-switch-row .nv-field__label { min-width: 0; }
+
+/* 무 JS 폴백 컨테이너: 목록 아래 카드처럼 */
+#cd-fallback { padding: 0; background: transparent; border: 0; }   /* 상세 모드는 시안대로 페이지 자체가 상세 화면 */
+
+@media (max-width: 1024px) {
+  .cd-detail__head { flex-direction: column; }
+}
+
+/* 상세 모드(/codes?codeGroupId=): 목록 대신 단독 화면 */
+.cd-detail-page > .cd-detail { padding: 0; background: transparent; }

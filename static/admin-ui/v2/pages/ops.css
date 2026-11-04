@@ -1,0 +1,22 @@
+/* 운영 진단 · 확장 서비스 (P6) — 토큰만 참조 */
+.ops-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ops-baseurl { max-width: 28rem; }
+.ops-baseurl code { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--cms-font-mono); font-size: var(--cms-fs-md); color: var(--cms-muted); }
+.ops-empty { padding: 10rem var(--cms-sp-6); }
+.ops-empty code { font-family: var(--cms-font-mono); font-size: var(--cms-fs-sm); }
+.ops-config > summary { cursor: pointer; list-style: none; }
+.ops-config > summary::-webkit-details-marker { display: none; }
+.ops-config[open] > summary .nv-icon { transform: rotate(180deg); }
+.ops-config:not([open]) > summary { border-bottom: 0; }
+.ops-config__pre { margin-top: var(--cms-sp-3); padding: var(--cms-sp-4); border-radius: var(--cms-radius-sm); background: var(--cms-surface-alt); font-family: var(--cms-font-mono); font-size: var(--cms-fs-md); line-height: 1.6; overflow-x: auto; }
+@media (max-width: 1024px) { .ops-summary { grid-template-columns: minmax(0, 1fr); } }
+/* tbody 의 th[scope=row]: KRDS 가 가운데·굵게 주므로 td 와 같은 모양으로 (공통 승격 후보) */
+.ops-summary ~ .nv-list .nv-table tbody th[scope="row"] { height: var(--cms-row-h); padding: 0 1.6rem; border-bottom: 1px solid var(--cms-border-soft); text-align: left; font-weight: var(--cms-fw-regular); vertical-align: middle; background: transparent; }
+.ops-summary ~ .nv-list .nv-table tbody th.is-code { font-family: var(--cms-font-mono); font-size: var(--cms-fs-md); color: var(--cms-muted); }
+.ops-summary ~ .nv-list .nv-table tbody th.is-title { font-weight: var(--cms-fw-medium); color: var(--cms-text); }
+.ops-summary ~ .nv-list .nv-table tbody tr:hover th { background: var(--cms-surface-muted); }
+/* 연결 서비스 — 오류 항목 목록 · 행 작업 · 최근 오류 · 서비스 화면 상태 패널 */
+.ext-details { margin-top: var(--cms-sp-2); padding-left: 1.8rem; list-style: disc; font-size: var(--cms-fs-sm); }
+.ext-actions { gap: var(--cms-sp-2); }
+.ext-failure { display: block; max-width: 28rem; margin-top: .4rem; overflow-wrap: anywhere; }
+.svc-state { padding: 10rem var(--cms-sp-6); }

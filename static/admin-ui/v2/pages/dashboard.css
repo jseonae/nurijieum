@@ -1,0 +1,88 @@
+/* 대시보드 v2 전용 (Figma 1061:41805) — 토큰만 참조 */
+.db-top { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); }
+.db-site { display: flex; flex-direction: column; gap: var(--cms-sp-3); padding: var(--cms-sp-10); border: 2px solid var(--cms-border-accent); min-height: 27rem; }
+.db-site .nv-kpi__title { color: var(--cms-text); }
+.db-site__body { display: flex; align-items: center; justify-content: center; gap: 4.8rem; margin-top: auto; }
+
+/* 반원 게이지: 시안 200×115, 트랙 16px, 세그먼트는 pathLength=100 기준 dasharray */
+.db-gauge { position: relative; flex: none; width: 20rem; height: 11.5rem; margin: 0; }
+.db-gauge__svg { display: block; width: 20rem; height: 11.5rem; overflow: visible; }
+.db-gauge__track { fill: none; stroke: var(--cms-chart-track); stroke-width: 16; stroke-linecap: round; }
+.db-gauge__seg { fill: none; stroke-width: 16; stroke-linecap: round; }
+.db-gauge__stop--active-a { stop-color: var(--cms-chart-active-a); }
+.db-gauge__stop--active-b { stop-color: var(--cms-chart-active-b); }
+.db-gauge__stop--inactive-a { stop-color: var(--cms-chart-inactive-a); }
+.db-gauge__stop--inactive-b { stop-color: var(--cms-chart-inactive-b); }
+.db-gauge__stop--attention-a { stop-color: var(--cms-chart-attention-a); }
+.db-gauge__stop--attention-b { stop-color: var(--cms-chart-attention-b); }
+.db-gauge__label { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+.db-gauge__label span { color: var(--cms-subtle); font-size: var(--cms-fs-md); }
+.db-gauge__label b { font-size: 3.2rem; line-height: 1.1; font-weight: var(--cms-fw-bold); color: var(--cms-gray-fg); }
+.db-site__legend { flex: none; display: flex; flex-direction: column; gap: 1rem; margin: 0; padding: 0; list-style: none; font-size: var(--cms-fs-md); }
+.db-site__legend li { display: flex; justify-content: space-between; gap: 2.4rem; }
+.db-site__legend b { font-weight: var(--cms-fw-semibold); }
+.db-dot { display: inline-block; width: 1rem; height: 1rem; margin-right: .8rem; border-radius: .3rem; vertical-align: -.1rem; }
+.db-dot--active { background: linear-gradient(135deg, var(--cms-chart-active-a), var(--cms-chart-active-b)); }
+.db-dot--inactive { background: linear-gradient(135deg, var(--cms-chart-inactive-a), var(--cms-chart-inactive-b)); }
+.db-dot--attention { background: linear-gradient(135deg, var(--cms-chart-attention-a), var(--cms-chart-attention-b)); }
+
+/* KPI 카드: 시안 3D 일러스트(84×84)를 제목 아래 왼쪽에 */
+.nv-kpi { padding: var(--cms-sp-10); }
+.db-kpi { position: relative; }
+.db-kpi__art { width: 8.4rem; height: 8.4rem; margin: .8rem 0 auto; align-self: flex-start; }
+.db-kpi .nv-kpi__value { margin-top: -2rem; }
+
+/* 콘텐츠 운영 현황 타일: 아이콘 60×60, 값 + 상태별 범례 */
+.db-tile { min-height: 17.5rem; border: 1px solid transparent; }
+.db-tile:hover, .db-tile:focus-visible { border-color: var(--cms-primary); }
+.db-tile .nv-stat-tile__head img { width: 6rem; height: 6rem; }
+.db-tile__legend { gap: .8rem 1.4rem; font-size: var(--cms-fs-sm); }
+.db-tile__legend b { margin-left: .2rem; color: var(--cms-muted); font-weight: var(--cms-fw-regular); }
+.db-tile__legend i[data-tone="ok"] { background: var(--cms-ok-fg); }
+
+.db-bottom { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.db-bottom .nv-card__head { padding: var(--cms-sp-8) var(--cms-sp-10) var(--cms-sp-5); }
+.db-bottom .nv-card__body { padding: var(--cms-sp-5) var(--cms-sp-6) var(--cms-sp-6); }
+.nv-recent__item { padding: 1.6rem 1.6rem; }
+/* 활동 로그 타임라인: 점 사이를 잇는 세로선(시안 Line #e2e8f0) */
+.db-feed .nv-feed__item { position: relative; padding: 1.2rem 0; }
+.db-feed .nv-feed__item + .nv-feed__item::before { content: ""; position: absolute; left: calc(5rem + .8rem + .3rem); top: -1.2rem; height: 2.2rem; border-left: 1.5px solid var(--cms-border); }
+.db-feed .nv-feed__text { color: var(--cms-text); }
+@media (max-width: 1280px) { .db-top, .db-bottom { grid-template-columns: minmax(0, 1fr); } .db-site__body { flex-wrap: wrap; } }
+
+/* 구글 애널리틱스(GA4) 이용 통계 (adm_1401) — 토큰만 참조 */
+.ga4__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--cms-sp-4); padding: var(--cms-sp-6) var(--cms-sp-6) var(--cms-sp-4); border-bottom: 1px solid var(--cms-border); }
+.ga4__title-wrap .nv-card__title { display: flex; align-items: center; gap: .8rem; margin: 0; }
+.ga4__asof { margin: .4rem 0 0; }
+.ga4__period { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem; }
+.ga4__period .nv-input { width: auto; flex: none; }
+.ga4__ranges { display: inline-flex; gap: .4rem; margin-right: var(--cms-sp-2); }
+.ga4__console { margin-left: var(--cms-sp-2); }
+.ga4__body { display: flex; flex-direction: column; gap: var(--cms-sp-4); }
+.ga4__cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--cms-sp-4); margin: 0; padding: 0; list-style: none; }
+.ga4__card { display: flex; flex-direction: column; gap: .8rem; padding: var(--cms-sp-6); border-radius: var(--cms-radius-lg); background: var(--cms-surface-alt); border: 1px solid var(--cms-border); }
+.ga4__card-title { color: var(--cms-muted); font-size: var(--cms-fs-md); }
+.ga4__card-row { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; flex-wrap: wrap; }
+.ga4__card-value { font-size: 3.2rem; line-height: 1.1; font-weight: var(--cms-fw-bold); color: var(--cms-text); }
+.ga4__delta { font-size: var(--cms-fs-md); font-weight: var(--cms-fw-semibold); color: var(--cms-muted); white-space: nowrap; }
+.ga4__delta[data-trend="up"] { color: var(--cms-ok-fg); }
+.ga4__delta[data-trend="up"]::before { content: "▲ "; }
+.ga4__delta[data-trend="down"] { color: var(--cms-err-fg); }
+.ga4__delta[data-trend="down"]::before { content: "▼ "; }
+.ga4__grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--cms-sp-4); }
+.ga4__side { display: flex; flex-direction: column; gap: var(--cms-sp-4); min-width: 0; }
+.ga4__panel { display: flex; flex-direction: column; gap: var(--cms-sp-3); margin: 0; padding: var(--cms-sp-6); border-radius: var(--cms-radius-lg); border: 1px solid var(--cms-border); background: var(--cms-surface); min-width: 0; }
+.ga4__panel-title { display: flex; align-items: baseline; gap: .8rem; font-size: var(--cms-fs-lg); font-weight: var(--cms-fw-semibold); margin: 0; }
+.ga4__panel-title small { font-size: var(--cms-fs-sm); font-weight: var(--cms-fw-regular); }
+.ga4__chart { width: 100%; height: 28rem; }
+.ga4__chart--sm { height: 16rem; }
+.ga4__bars { display: flex; flex-direction: column; gap: .8rem; margin: 0; padding: 0; list-style: none; font-size: var(--cms-fs-md); }
+.ga4__bars li { position: relative; isolation: isolate; display: flex; justify-content: space-between; gap: var(--cms-sp-3); padding-bottom: .6rem; }
+.ga4__bars li i { position: absolute; left: 0; bottom: 0; height: .4rem; width: var(--ga4-pct, 0); border-radius: .2rem; background: var(--cms-primary); }
+.ga4__bars li::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .4rem; border-radius: .2rem; background: var(--cms-chart-track); z-index: -1; }
+.ga4__bars b { font-weight: var(--cms-fw-semibold); }
+.ga4 .nv-table .ga4__num { text-align: right; }
+@media (max-width: 1200px) {
+  .ga4__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ga4__grid { grid-template-columns: minmax(0, 1fr); }
+}

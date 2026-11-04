@@ -1,0 +1,36 @@
+/* 통합회원 v2 페이지 전용 (토큰만 참조). 공통은 cms-admin-v2.css */
+
+/* 성명 셀: 버튼이지만 링크처럼 — 클릭 시 회원 정보 패널 */
+.nv-member-name { border: 0; background: none; padding: 0; font: inherit; font-weight: var(--cms-fw-medium); color: var(--cms-text); cursor: pointer; text-align: left; }
+.nv-member-name:hover { color: var(--cms-primary-text); text-decoration: underline; text-underline-offset: .2rem; }
+.nv-table tr[aria-selected="true"] .nv-member-name { color: var(--cms-primary-text); }
+
+/* 패널 상단 프로필 아바타 (Figma: 80px 원형, 연파랑) */
+.nv-member-avatar { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; padding: .4rem 0 .8rem; }
+.nv-member-avatar__circle { width: 8rem; height: 8rem; border-radius: 50%; background: var(--cms-primary-tint); color: var(--cms-primary-text); display: inline-flex; align-items: center; justify-content: center; }
+.nv-member-avatar__circle .nv-icon { width: 4rem; height: 4rem; }
+.nv-member-avatar__hint { font-size: var(--cms-fs-sm); color: var(--cms-subtle); }
+
+/* 패널 폼 행: 라벨 8.4rem + 입력 (Figma 필수/선택 입력 사항 카드) */
+.nv-panel .nv-field--row { gap: 1.2rem; }
+.nv-panel .nv-field--row .nv-field__label { min-width: 8.4rem; flex: none; font-size: var(--cms-fs-md); }
+.nv-panel .nv-field--row .nv-input, .nv-panel .nv-field--row .nv-select { flex: 1; min-width: 0; }
+.nv-panel .nv-form-group__title { font-size: var(--cms-fs-md); font-weight: var(--cms-fw-medium); }
+.nv-panel .nv-form-group .nv-field__hint { margin-top: -.4rem; }
+
+/* 회원 정보(읽기) 정의 목록 */
+.nv-member-dl { display: grid; grid-template-columns: 8.4rem minmax(0, 1fr); row-gap: 1.6rem; column-gap: 1.2rem; align-items: center; font-size: var(--cms-fs-base); }
+.nv-member-dl dt { color: var(--cms-muted); font-size: var(--cms-fs-md); font-weight: var(--cms-fw-medium); }
+.nv-member-dl dd { margin: 0; color: var(--cms-text); }
+
+/* 드롭메뉴 안 POST 폼(비밀번호 재설정·삭제) */
+.nv-dropmenu__menu form { display: contents; }
+
+/* 행 드롭메뉴가 목록 카드(.nv-list overflow:hidden) 밖으로 나가야 마지막 행에서도 잘리지 않는다 — 페이지 임시 보정 */
+.nv-list { overflow: visible; }
+.nv-list > .nv-filter { border-radius: var(--cms-radius-lg) var(--cms-radius-lg) 0 0; }
+.nv-table-scroll { overflow: visible; }   /* overflow-x:auto 가 세로도 잘라 드롭메뉴가 가려짐(컬럼 7개라 가로 스크롤 불필요) */
+@media (max-width: 1280px) { .nv-table-scroll { overflow-x: auto; } }
+/* 시안: 로그인ID 는 보통 굵기 회색, 성명은 굵게 */
+.nv-table td.is-code code { font-family: var(--cms-font); font-size: var(--cms-fs-base); color: var(--cms-muted); }
+.nv-member-name { font-weight: var(--cms-fw-semibold); }

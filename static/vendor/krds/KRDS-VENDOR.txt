@@ -1,0 +1,10 @@
+Source: krds-uiux npm package 1.1.0
+Package: https://www.npmjs.com/package/krds-uiux
+Project: https://github.com/KRDS-uiux/krds-uiux
+
+This directory vendors official KRDS css, js, font, and image resources for the cms-admin-bff
+Thymeleaf UI. Original KRDS resource files are copied without local edits.
+
+Addition (2026-09-16): fonts/PretendardGOV-SemiBold.subset.{woff2,woff} from orioncactus/pretendard v1.3.9
+(packages/pretendard-gov/dist/web/static/*-subset, OFL 1.1). Same subset build as the krds-uiux 1.1.0 files
+(Regular sha256 identical); added because the Figma design uses weight 600 heavily and the package ships only 400/500/700.

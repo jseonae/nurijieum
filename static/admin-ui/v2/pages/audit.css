@@ -1,0 +1,16 @@
+/* 감사 로그 v2 페이지 전용 (Figma 820:53722 / 820:53915). 토큰(--cms-*)만 참조 */
+.au-tabs { margin-top: calc(var(--cms-sp-6) * -1 + var(--cms-sp-2)); }
+.au-tabs .nv-tab { text-decoration: none; }
+.au-table .col-date { width: 17rem; white-space: nowrap; }
+.au-table .au-id { max-width: 30rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.au-table .au-summary { min-width: 20rem; }
+.au-table .au-reason { min-width: 14rem; }
+/* 접속기록 항목: 접속 IP(IPv6 포함)는 한 줄, 건수는 오른쪽 정렬 */
+.au-table .col-ip { white-space: nowrap; }
+.au-table .col-count { text-align: right; white-space: nowrap; }
+.au-table tbody td { vertical-align: top; padding-top: 1.4rem; padding-bottom: 1.4rem; height: auto; }
+.au-table tbody tr[hidden] { display: none; }
+#au-nomatch { border-top: 1px solid var(--cms-border-soft); }
+
+/* 시안: 이벤트는 일반 텍스트(개인정보 열람만 배지), 리소스 ID·일시는 회색 */
+.au-event { font-weight: var(--cms-fw-medium); }
