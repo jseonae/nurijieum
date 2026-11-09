@@ -363,3 +363,81 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
   border-color: var(--cms-err-fg); background: var(--cms-err-fg); color: var(--cms-on-primary);
 }
 .nv-table tbody .nv-btn--sm.nv-btn--danger:focus-visible { box-shadow: var(--cms-focus); outline: 0; }
+
+/* ── 개선 1단계 공통 부품(2026-11-09) ─────────────────────────────
+   피그마 「추가기능」 페이지 00~12 섹션에서 정한 부품. 모양은 pages/ui-parts.html 에서 본다.
+   토큰만 쓰고, 기존 nv-* 부품(nv-btn · nv-badge · nv-dropmenu · nv-input)과 함께 쓴다. */
+
+/* 1) 머리 막대 저장 영역 — 상태 글 · 되돌리기 · 「(탭 이름) 저장」. 탭마다 따로 저장한다 */
+.savehead { display: flex; align-items: center; gap: .8rem; margin-left: auto; }
+.savehead__status { margin-right: .4rem; color: var(--cms-subtle); font-size: var(--cms-fs-md); white-space: nowrap; }
+.savehead__status--dirty { color: var(--cms-warn-fg); font-weight: var(--cms-fw-semibold); }
+
+/* 2) 사유 입력 줄 — 바꾼 내용이 있을 때만 머리 막대 바로 아래에 나타난다 */
+.reasonbar { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 1.2rem 1.6rem; padding: 1.2rem var(--cms-content-px); background: var(--cms-warn-bg); border-bottom: 1px solid var(--cms-change-border); }
+.reasonbar[hidden] { display: none; }
+.reasonbar__changes { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; min-height: 4rem; }
+.reasonbar__label { color: var(--cms-warn-fg); font-size: var(--cms-fs-md); font-weight: var(--cms-fw-semibold); white-space: nowrap; }
+.reasonbar__chip { display: inline-flex; align-items: center; gap: .6rem; height: 3.2rem; padding: 0 1rem; border: 1px solid var(--cms-change-border); border-radius: var(--cms-radius-sm); background: var(--cms-surface); color: var(--cms-text-strong); font-size: var(--cms-fs-md); font-weight: var(--cms-fw-semibold); }
+.reasonbar__chip-name { color: var(--cms-muted); }
+.reasonbar__chip-from { color: var(--cms-subtle); font-weight: var(--cms-fw-regular); }
+.reasonbar__more { border: 0; background: none; padding: 0 .4rem; color: var(--cms-warn-fg); font-size: var(--cms-fs-md); font-weight: var(--cms-fw-semibold); text-decoration: underline; cursor: pointer; }
+.reasonbar__sep { align-self: center; width: 1px; height: 2.4rem; background: var(--cms-change-border); }
+.reasonbar__reason { flex: 1 1 32rem; display: flex; align-items: flex-start; gap: 1rem; min-width: 0; }
+.reasonbar__reason > .nv-field__label { margin: 0; line-height: 4rem; white-space: nowrap; }
+.reasonbar__input { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: .4rem; }
+.reasonbar__input .nv-input { height: 4rem; }
+.reasonbar__input .nv-input[aria-invalid="true"] { border-color: var(--cms-err-fg); }
+.reasonbar__opt { display: inline-flex; align-items: center; gap: .8rem; min-height: 4rem; font-size: var(--cms-fs-md); white-space: nowrap; }
+
+/* 3) 바뀐 항목 표시 — 칸은 칠하지 않고, 이름 오른쪽 점 + 「이전: 값」 */
+.chg { display: inline-flex; align-items: center; gap: .6rem; }
+.chg__dot { flex: none; width: .7rem; height: .7rem; border-radius: 50%; background: var(--cms-change-dot); }
+.chg__prev { color: var(--cms-warn-fg); font-size: var(--cms-fs-sm); font-weight: var(--cms-fw-medium); }
+/* 표에 들어간 줄: 저장 전(노랑) · 방금 저장(연파랑) */
+.nv-table tbody tr.is-unsaved td, .ptable tbody tr.is-unsaved td { background: var(--cms-warn-bg); }
+.nv-table tbody tr.is-added td { background: var(--cms-surface-soft); }
+
+/* 4) 저장 안 한 탭 점 */
+.nv-tabs [role="tab"][data-dirty="true"]::after { content: ""; display: inline-block; width: .7rem; height: .7rem; margin-left: .6rem; border-radius: 50%; background: var(--cms-change-dot); vertical-align: .2rem; }
+
+/* 5) 저장 안 하고 다른 탭으로 갈 때 — 누른 탭 아래 작은 확인 창 */
+.leavepop { position: absolute; z-index: 40; width: 36rem; padding: 1.8rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); background: var(--cms-surface); box-shadow: var(--cms-shadow-modal); }
+.leavepop__title { color: var(--cms-text-strong); font-size: var(--cms-fs-lg); font-weight: var(--cms-fw-bold); }
+.leavepop__desc { margin-top: .6rem; color: var(--cms-muted); font-size: var(--cms-fs-md); }
+.leavepop__foot { display: flex; align-items: center; gap: .6rem; margin-top: 1.4rem; }
+.leavepop__foot > :first-child { margin-right: auto; }
+.nv-btn.is-danger-text { color: var(--cms-err-fg); }
+
+/* 6) 알림(토스트) — 저장 · 추가 · 등록 결과 */
+.ntoast { position: fixed; left: 50%; bottom: 4rem; z-index: 60; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 1rem; padding: 1.2rem 1.8rem; border-radius: var(--cms-radius); background: var(--cms-text-strong); color: var(--cms-on-dark); box-shadow: var(--cms-shadow-modal); font-size: var(--cms-fs-base); }
+.ntoast .nv-icon { color: var(--cms-ok-bg); }
+.ntoast__link { color: var(--cms-chart-active-a); font-weight: var(--cms-fw-semibold); text-decoration: none; }
+
+/* 7) 검색 옵션창 — 한 줄 결과, 누르면 바로 고름. 맨 아래 「상세 검색」 · 「여러 명 한번에 고르기」 */
+.pick { position: relative; }
+.pick__list { position: absolute; left: 0; right: 0; top: calc(100% + .4rem); z-index: 30; display: flex; flex-direction: column; gap: .2rem; max-height: 36rem; overflow: auto; padding: .6rem; border: 1px solid var(--cms-border-strong); border-radius: var(--cms-radius); background: var(--cms-surface); box-shadow: var(--cms-shadow); }
+.pick__row { width: 100%; display: flex; align-items: center; gap: 1rem; min-height: 4.4rem; padding: 0 1.2rem; border: 0; border-radius: var(--cms-radius-sm); background: none; color: var(--cms-text); font-size: var(--cms-fs-base); text-align: left; cursor: pointer; }
+.pick__row:is(:hover, :focus-visible, [aria-selected="true"]) { background: var(--cms-surface-muted); outline: 0; }
+.pick__id { color: var(--cms-subtle); font-size: var(--cms-fs-md); }
+.pick__meta { margin-left: auto; color: var(--cms-muted); font-size: var(--cms-fs-md); }
+.pick__row[aria-disabled="true"] { color: var(--cms-placeholder); cursor: not-allowed; background: none; }
+.pick__row[aria-disabled="true"] :is(.pick__id, .pick__meta) { color: var(--cms-placeholder); }
+.pick__sep { height: 1px; margin: .4rem 0; background: var(--cms-border); }
+.pick__foot { color: var(--cms-primary-text); font-weight: var(--cms-fw-semibold); }
+.pick__foot .pick__meta { color: var(--cms-subtle); font-weight: var(--cms-fw-regular); }
+
+/* 8) 작은 체크 목록 창 — 서브관리자의 권한그룹 바꾸기 등. 체크하면 바로 저장 */
+.checkpop { position: absolute; z-index: 30; width: 32rem; padding: 1.4rem .8rem 1rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius-lg); background: var(--cms-surface); box-shadow: var(--cms-shadow-modal); }
+.checkpop__head { padding: 0 .8rem .8rem; }
+.checkpop__title { color: var(--cms-text-strong); font-size: var(--cms-fs-base); font-weight: var(--cms-fw-bold); }
+.checkpop__desc { color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.checkpop__item { display: flex; width: 100%; align-items: center; gap: 1rem; padding: .9rem .8rem; border-radius: var(--cms-radius-sm); cursor: pointer; }
+.checkpop__item:has(input:checked) { background: var(--cms-surface-soft); }
+.checkpop__count { margin-left: auto; color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.checkpop__foot { margin-top: .6rem; padding: .8rem .8rem 0; border-top: 1px solid var(--cms-border); }
+
+/* 부품 모음 페이지에서만: 떠 있는 부품을 제자리에 놓고 본다 */
+.parts-static :is(.leavepop, .pick__list, .checkpop, .ntoast, .nv-dropmenu__menu) { position: static; transform: none; display: flex; }
+.parts-static :is(.leavepop, .checkpop) { display: block; }
+.parts-static .nv-dropmenu__menu { flex-direction: column; }
