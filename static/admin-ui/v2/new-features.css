@@ -858,3 +858,16 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
 .multimodal__right .nv-field { display: flex; flex-direction: column; gap: .6rem; }
 .gmem.is-added { background: var(--cms-surface-soft); }
 @media (max-width: 1024px) { .multimodal__body { grid-template-columns: minmax(0, 1fr); overflow-y: auto; } .multimodal__right { border-left: 0; border-top: 1px solid var(--cms-border); } }
+
+/* ── 목록 표 통일(2026-11-09) — 피그마 14 「내 담당 메뉴」 표 기준. 모든 목록 화면(.nv-list) 표가 같은 모양
+   머리 줄 44 · 둥근 모서리 6 · 중간 굵기 13 / 줄 50 · 아래 구분선만 · 본문 14 같은 글꼴 · 바깥 테두리 없음 */
+.nv-list .nv-table thead th { font-weight: var(--cms-fw-medium); color: var(--cms-muted); }
+.nv-list .nv-table thead th:first-child { border-radius: var(--cms-radius-sm) 0 0 var(--cms-radius-sm); }
+.nv-list .nv-table thead th:last-child { border-radius: 0 var(--cms-radius-sm) var(--cms-radius-sm) 0; }
+.nv-list .nv-table thead th:only-child { border-radius: var(--cms-radius-sm); }
+.nv-list .nv-table tbody td { height: var(--cms-row-h); border-bottom-color: var(--cms-surface-alt); color: var(--cms-muted); font-size: var(--cms-fs-base); }
+.nv-list .nv-table tbody td.nv-text-sm { font-size: var(--cms-fs-base); }
+.nv-list .nv-table tbody :is(td.nv-mono, td code.nv-mono, td .nv-mono) { font-family: inherit; font-size: inherit; color: inherit; }
+.nv-list .nv-table tbody td small { font-size: var(--cms-fs-sm); color: var(--cms-subtle); }
+.nv-list .nv-table tbody :is(td.is-title, td b, .menu-link) { color: var(--cms-text-strong); }
+.nv-list .nv-table tbody tr:has([data-selrow]:checked) .menu-link { color: var(--cms-primary-text); }
