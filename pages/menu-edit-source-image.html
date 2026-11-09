@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<!-- 화면: 메뉴관리 — 수정 — 소스 수정, 이미지 삽입 모달
+<!-- 화면: 메뉴관리 — 수정 — 소스 수정, 이미지 삽입
+     피그마 04 「04-B1 이미지 삽입 · 그림 고름」
      반영 위치: templates/admin-v2/pages/navigation-management.html
      목데이터 화면이다. 저장·조회는 동작하지 않는다. -->
 <html lang="ko" data-theme="nuri">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메뉴관리 — 수정 — 소스 수정, 이미지 삽입 모달 | 누리지음 관리자</title>
+    <title>메뉴관리 — 수정 — 소스 수정, 이미지 삽입 | 누리지음 관리자</title>
     <link rel="icon" href="../static/brand/favicon-32.png">
     <link rel="stylesheet" href="../static/vendor/krds/css/common/common.css">
     <link rel="stylesheet" href="../static/vendor/krds/css/component/component.css">
@@ -53,32 +54,39 @@
     </header>
 
     <main class="nv-content" id="content">
-      <!-- 화면 1·3: 메뉴 관리 / 관리자 메뉴 관리 (목록 → 메뉴명 누르면 나무 + [메뉴 정보 | 권한]) -->
-      <div id="screen-menu" class="nv-stack" style="gap:2.4rem"><div class="ed-page ">
-    <div class="nv-editor-header edh">
-      <div class="edh__row">
-        <button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__back" data-tolist="" data-pub-href="menu-list.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-arrow-left"></use></svg>목록으로</button>
-        <ol class="nv-breadcrumb edh__crumb" aria-label="위치"><li>사이트 관리</li><li>메뉴관리</li><li>알림마당</li></ol>
-        <span class="edh__nav"><button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__step" data-dir="prev" data-menu="s3"><svg class="nv-icon flip" aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg>이전: 알림마당</button><button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__step" data-dir="next" data-menu="s32">다음: 공지사항<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg></button></span>
+      <div id="screen-menu" class="edx">
+    <div class="edx-top">
+      <div class="nv-editor-header">
+        <button type="button" class="edx-back" data-tolist="" data-pub-href="menu-list.html" aria-label="메뉴 목록으로" data-tip="메뉴 목록으로"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-arrow-left"></use></svg></button>
+        <p class="edx-kind">메뉴 수정</p>
+        <div class="savehead"><span class="savehead__status">저장된 상태입니다</span><button type="button" class="nv-btn nv-btn--outline" id="btn-revert" disabled="">되돌리기</button><button type="button" class="nv-btn nv-btn--primary" id="btn-save" disabled="">소스 저장</button></div>
       </div>
-      <div class="edh__row edh__row--title"><span class="edh__kind">메뉴 수정</span><h1 class="edh__name">조사개요</h1><span class="edh__badges"><span class="nv-badge nv-badge--info" data-tip="HTML — 국특원 메뉴구조 서식 「유형」의 HTML. 콘텐츠를 보여 주고 「소스 수정」 탭에서 고칩니다(당진 「게시판 사용여부」 html)">HTML</span>
-      
-      
-      <span class="nv-badge nv-badge--outline" data-tip="연결한 콘텐츠 — 「소스 수정」 탭에서 고칩니다">콘텐츠: 조사개요</span>
-      <code class="mhead__path" data-tip="메뉴코드 — 국특원 메뉴구조 서식 열 이름. 값은 전자정부 방식 sub01_01(10/19 결정)">sub03_01</code><span class="mhead__path" data-tip="링크URL — 방문자가 여는 주소(공개 화면 앞에 /public)">/public/survey-overview</span></span></div>
     </div>
-    <div class="nv-tabs nv-tabs--auto gtabs ed-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="mt-info" aria-controls="mt-panel" aria-selected="false" data-mtab="info" data-tip="이 메뉴의 이름 · 위치 · 연결 대상 · 담당자를 고칩니다. 「수정하기」를 누르면 사유와 함께 수정 이력에 남습니다." data-pub-href="menu-edit-info.html"><span class="tab__l">메뉴 정보<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-src" aria-controls="mt-panel" aria-selected="true" data-mtab="src" data-tip="이 메뉴가 보여 주는 화면 본문을 고칩니다. 「임시저장」은 비공개이고, 「수정하기」를 눌러야 누리집에 게시됩니다. · 누리지음 「콘텐츠 수정」 · 당진 「콘텐츠수정」" data-pub-href="menu-edit-source.html"><span class="tab__l">소스 수정<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-perm" aria-controls="mt-panel" aria-selected="false" data-mtab="perm" data-tip="이 메뉴를 누리집에서 누가 볼 수 있고, 누가 맡아 관리하는지 정합니다. 「저장」하면 사유와 함께 수정 이력에 남습니다. · 국특원 SFR-009 「접근권한을 세분화」 · 누리지음 「권한」" data-pub-href="menu-edit-access.html"><span class="tab__l">접근권한<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-hist" aria-controls="mt-panel" aria-selected="false" data-mtab="hist" data-tip="이 메뉴를 언제, 누가, 왜 고쳤는지 봅니다. 기록은 고치거나 지울 수 없습니다. · 국특원 SFR-009 「수정 이력」 · 당진 「관리 히스토리」" data-pub-href="menu-edit-history.html"><span class="tab__l">수정 이력<span class="tab__dot"></span></span></button></div>
-    <div id="mt-panel" role="tabpanel" aria-labelledby="mt-src" class="nv-stack" style="gap:2.4rem"><div class="nv-nav-form__grid info-grid src-grid">
-      <div class="nv-card nv-card--pad nv-stack">
-        <div class="nv-field"><label for="src-title" class="nv-field__label">제목</label><input id="src-title" class="nv-input" value="조사개요" data-srctitle=""></div>
-        <div class="ed-bar" role="toolbar" aria-label="편집 도구" data-tip="HTML5 기반 에디터(국특원 SFR-009) — 누리지음은 SunEditor">
+    <section class="edx-card" aria-labelledby="edx-name">
+      <div class="edx-card__head">
+        <div class="edx-card__id">
+          <ol class="nv-breadcrumb" aria-label="위치"><li>사이트 관리</li><li>메뉴관리</li><li>알림마당</li></ol>
+          <div class="edx-card__title"><span class="lvl lvl--2" aria-label="2단계">2</span><h1 class="edx-card__name" id="edx-name">조사개요</h1><span class="nv-badge">HTML</span><span class="nv-badge nv-badge--primary">노출</span></div>
+        </div>
+        <div class="edx-card__tools">
+          <a class="edx-site" href="#" data-soon="">누리집에서 보기<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-external"></use></svg></a>
+          <span class="edx-steps"><button type="button" data-dir="prev" data-menu="s3"><svg class="nv-icon flip" aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg>이전: 알림마당</button><button type="button" data-dir="next" data-menu="s32">다음: 공지사항<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg></button></span>
+        </div>
+      </div>
+      <div class="nv-tabs nv-tabs--auto gtabs ed-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="mt-info" aria-controls="mt-panel" aria-selected="false" data-mtab="info" data-pub-href="menu-edit-info.html">메뉴 정보</button><button type="button" role="tab" id="mt-src" aria-controls="mt-panel" aria-selected="true" data-mtab="src" data-pub-href="menu-edit-source.html">소스 수정</button><button type="button" role="tab" id="mt-perm" aria-controls="mt-panel" aria-selected="false" data-mtab="perm" data-pub-href="menu-edit-access.html">접근권한</button><button type="button" role="tab" id="mt-hist" aria-controls="mt-panel" aria-selected="false" data-mtab="hist" data-pub-href="menu-edit-history.html">수정 이력</button></div>
+      <div id="mt-panel" role="tabpanel" aria-labelledby="mt-src" class="edx-body">
+        <div class="edx-main src-main">
+          <div class="nv-stack" style="gap:1.6rem">
+            <div class="nv-field"><label for="src-title" class="nv-field__label">제목</label><input id="src-title" class="nv-input" value="조사개요" data-srctitle=""></div>
+            <div><div class="ed-bar" role="toolbar" aria-label="편집 도구" data-tip="HTML5 기반 에디터(국특원 SFR-009) — 누리지음은 SunEditor">
           <button type="button" class="ed-btn" data-ed="bold" aria-label="굵게" data-tip="굵게"><b>B</b></button><button type="button" class="ed-btn" data-ed="h3" aria-label="소제목" data-tip="소제목">H3</button><button type="button" class="ed-btn" data-ed="ul" aria-label="글머리 목록" data-tip="글머리 목록"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-ul"></use></svg></button><button type="button" class="ed-btn" data-ed="ol" aria-label="번호 목록" data-tip="번호 목록"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-ol"></use></svg></button><button type="button" class="ed-btn" data-ed="table" aria-label="표 넣기" data-tip="표 넣기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-grid"></use></svg></button><button type="button" class="ed-btn" data-ed="link" aria-label="링크" data-tip="링크"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-link"></use></svg></button>
-          <button type="button" class="ed-btn" data-imgopen="" data-pub-href="menu-edit-source-image.html" aria-label="이미지 삽입" data-tip="이미지 삽입 — 대체 텍스트를 꼭 적습니다(KWCAG)"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></button>
+          <button type="button" class="ed-btn" data-imgopen="" data-pub-href="menu-edit-source-image.html" data-tip="이미지 삽입" aria-label="이미지 삽입" data-tip="이미지 삽입 — 대체 텍스트를 꼭 적습니다(KWCAG)"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></button>
           <span class="ed-sep" aria-hidden="true"></span>
           <button type="button" class="ed-btn " data-edcode="" aria-pressed="false" aria-label="HTML 소스 보기" data-tip="HTML 소스 보기 — 태그를 직접 고칩니다"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-code"></use></svg></button>
           <span class="ed-view" role="group" aria-label="보기"><button type="button" class="ed-btn is-on" data-edmode="edit" aria-pressed="true">편집</button><button type="button" class="ed-btn " data-edmode="split" aria-pressed="false">분할</button><button type="button" class="ed-btn " data-edmode="preview" aria-pressed="false">미리보기</button></span>
         </div>
-        <div class="ed-wrap ed-wrap--edit">
+        
+            <div class="ed-wrap ed-wrap--edit">
           <div id="ed-area" class="ed-area prose" contenteditable="true" role="textbox" aria-multiline="true" aria-label="본문"><h2>특수교육 실태조사 개요</h2><p>특수교육 실태조사는 특수교육 현장의 여건과 요구를 파악하기 위해 국립특수교육원이 3년 주기로 실시하는 국가승인 통계조사입니다. 이 시스템은 2008년부터의 조사 결과를 통계표·시각화로, 2023년 마이크로데이터를 교차분석으로 제공합니다.</p><h3>조사 구성 (8종)</h3>
 <table class="sedis-table">
 <caption>특수교육 실태조사 조사 구성 표로 조사, 대상, 2023년 응답자 수로 구성되어 있습니다.</caption>
@@ -95,50 +103,49 @@
 <tr><th scope="row">합계</th><td></td><td>13,645</td></tr>
 </tbody></table><h3>자료 형태</h3><ul><li>시계열 시각화: KOSIS 공표 통계표</li><li>핵심데이터 시각화: 회차별 결과보고서 요약본 통계표</li><li>교차분석: 2023년 MDIS 마이크로데이터(가중치 반영)</li><li>특수교육 현황: 교육부·국립특수교육원 특수교육통계</li></ul><h3>이용 안내</h3><ul><li>비회원: 통계정보·알림마당 전체 열람</li><li>연구원(승인): 데이터 분석(교차분석) 이용</li><li>관리자: 지표·메뉴·게시판·회원 관리</li></ul></div>
           
+        </div></div>
+          </div>
+          <div class="edx-foot">
+            <p class="edx-hint">게시 중인 v2 본문입니다. 「임시저장」은 비공개로만 저장하고(버전 번호 그대로, 누리집도 그대로), 위 「소스 저장」은 저장하고 v3로 게시합니다.</p>
+            <button type="button" class="nv-btn nv-btn--outline" data-soon=""><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-eye"></use></svg>미리보기</button><button type="button" class="nv-btn nv-btn--outline" data-soon=""><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-download"></use></svg>HTML 내려받기</button><button type="button" class="nv-btn nv-btn--outline" data-soon=""><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-draft"></use></svg>임시저장</button>
+          </div>
         </div>
-        <p class="nv-field__hint">게시 중인 v2 본문입니다. 고친 뒤 [임시저장]은 비공개 임시저장본으로만 저장하고(버전 번호 그대로) 누리집도 그대로, [수정하기]는 저장하고 게시해 v3 로 올립니다.</p>
+        <aside class="edx-side" aria-label="게시 설정">
+          <div class="edx-opt" role="radiogroup" aria-labelledby="pub-label"><span class="nv-field__label" id="pub-label">게시 여부</span>
+            <div class="nv-choice-list"><label class="nv-radio"><input type="radio" name="pubmode" value="now" checked="" data-pubmode="">게시중 (즉시 배포)</label><label class="nv-radio"><input type="radio" name="pubmode" value="draft" data-pubmode="">임시저장 (비공개)</label><label class="nv-radio"><input type="radio" name="pubmode" value="reserve" data-pubmode="">예약 게시</label></div></div>
+          <div class="edx-opt"><span class="nv-field__label">버전 이력 <span class="nv-badge">2</span></span>
+            <ul class="ver-list">
+              <li class="ver"><span class="ver__no">v2</span><span class="ver__meta"><span class="nv-badge nv-badge--ok">게시중</span>2026-10-24 16:05 · 김지원</span><span class="ver__acts"><button type="button" class="nv-btn nv-btn--sm nv-btn--icon nv-btn--outline" data-verprev="2" aria-label="v2 미리보기" data-tip="미리보기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-eye"></use></svg></button></span></li>
+              <li class="ver"><span class="ver__no">v1</span><span class="ver__meta"><span class="nv-badge">구버전</span>2026-10-12 10:20 · 김지원</span><span class="ver__acts"><button type="button" class="nv-btn nv-btn--sm nv-btn--icon nv-btn--outline" data-verprev="1" aria-label="v1 미리보기" data-tip="미리보기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-eye"></use></svg></button><button type="button" class="nv-btn nv-btn--sm nv-btn--icon nv-btn--outline" data-verback="1" aria-label="v1 으로 되돌리기" data-tip="이 버전으로 되돌리기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-refresh"></use></svg></button></span></li>
+            </ul>
+            <span class="nv-field__hint">게시·검토 기록이 있는 버전은 기록으로 남아 지울 수 없습니다.</span></div>
+          <div class="edx-opt"><span class="nv-field__label">콘텐츠 정보</span>
+            <dl class="kv2"><dt>Content ID</dt><dd class="nv-mono">CTd2b9946e99b04dadaa3d6baa46cf8271</dd><dt>발행 버전</dt><dd>v2 · 2026-10-24 16:05</dd></dl></div>
+        </aside>
       </div>
-      <div class="nv-stack">
-        <div class="nv-card nv-card--pad nv-stack" style="gap:1rem">
-          <div class="card-title">게시 여부 설정</div>
-          <div class="nv-choice-list"><label class="nv-radio"><input type="radio" name="pubmode" value="now" checked="" data-pubmode="">게시중 (즉시 배포)</label><label class="nv-radio"><input type="radio" name="pubmode" value="draft" data-pubmode="">임시저장 (비공개)</label><label class="nv-radio"><input type="radio" name="pubmode" value="reserve" data-pubmode="">예약 게시</label></div>
-          
+    </section>
+      <div class="nv-modal-backdrop">
+        <div class="nv-modal imgmodal" role="dialog" aria-modal="true" aria-labelledby="im-t">
+          <div class="nv-modal__head"><h2 class="nv-modal__title" id="im-t">이미지 삽입</h2><button type="button" class="modal-x" aria-label="닫기" data-pub-href="menu-edit-source.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-close"></use></svg></button></div>
+          <div class="nv-modal__body">
+            <div class="imgmodal__label"><span id="img-pick-label">넣을 그림</span><a class="imgmodal__up" href="#" data-soon="">미디어에 새 그림 올리기<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-external"></use></svg></a></div>
+            <div class="imgbar" role="search"><label class="nv-sr-only" for="img-folder">폴더</label><select id="img-folder" class="nv-select"><option selected="">이 메뉴 폴더 (sub03)</option><option>전체</option></select>
+              <div class="nv-input-wrap"><label for="img-q" class="nv-sr-only">파일 이름으로 찾기</label><input type="search" id="img-q" class="nv-input" placeholder="파일 이름으로 찾기"><span class="nv-input-wrap__btn" aria-hidden="true"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-search"></use></svg></span></div></div>
+            <p class="imgcount">그림 <b>12</b>개 · 최근 올린 순</p>
+            <div class="imggrid" role="radiogroup" aria-labelledby="img-pick-label"><label class="imgitem"><input type="radio" name="img-pick" value="survey-chart.png" checked=""><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">survey-chart.png</span><span class="imgitem__size">1200×675</span></label><label class="imgitem"><input type="radio" name="img-pick" value="survey-cycle.png"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">survey-cycle.png</span><span class="imgitem__size">800×800</span></label><label class="imgitem"><input type="radio" name="img-pick" value="logo-nise.png"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">logo-nise.png</span><span class="imgitem__size">600×160</span></label><label class="imgitem"><input type="radio" name="img-pick" value="banner-main.jpg"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">banner-main.jpg</span><span class="imgitem__size">1920×480</span></label><label class="imgitem"><input type="radio" name="img-pick" value="survey-poster.jpg"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">survey-poster.jpg</span><span class="imgitem__size">900×1270</span></label><label class="imgitem"><input type="radio" name="img-pick" value="team-photo.jpg"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">team-photo.jpg</span><span class="imgitem__size">1600×1067</span></label><label class="imgitem"><input type="radio" name="img-pick" value="icon-stat.svg"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">icon-stat.svg</span><span class="imgitem__size">48×48</span></label><label class="imgitem"><input type="radio" name="img-pick" value="org-chart.png"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">org-chart.png</span><span class="imgitem__size">1400×900</span></label><label class="imgitem"><input type="radio" name="img-pick" value="region-map.png"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">region-map.png</span><span class="imgitem__size">1000×700</span></label><label class="imgitem"><input type="radio" name="img-pick" value="respondent-table.png"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">respondent-table.png</span><span class="imgitem__size">1200×800</span></label><label class="imgitem"><input type="radio" name="img-pick" value="bg-pattern.jpg"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">bg-pattern.jpg</span><span class="imgitem__size">1920×1080</span></label><label class="imgitem"><input type="radio" name="img-pick" value="sign-head.png"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span class="imgitem__name">sign-head.png</span><span class="imgitem__size">400×300</span></label></div>
+            <div class="imgpicked"><span class="imgitem__thumb"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-image"></use></svg></span><span><span class="imgpicked__k">고른 그림</span> <b>survey-chart.png</b> <span class="nv-text-subtle">1200×675 px</span><span class="imgpicked__path nv-mono">/images/sedis/sub03/</span></span></div>
+            <div class="nv-field"><label for="img-alt" class="nv-field__label">대체 텍스트 <span class="req" aria-hidden="true">*</span> <span class="nv-text-subtle nv-text-sm">그림의 내용 · 뜻</span></label>
+              <input id="img-alt" class="nv-input" placeholder="예: 특수교육 실태조사 8종 조사 구성도" aria-describedby="img-alt-hint"><span class="nv-field__hint" id="img-alt-hint">화면을 볼 수 없는 이용자에게 그림 대신 읽어 주는 글입니다. 그림에 담긴 내용을 짧게 적습니다.</span></div>
+            <label class="nv-check"><input type="checkbox" data-pub-href="menu-edit-source-image.html">꾸밈용 그림 (뜻이 없는 장식이라 대체 텍스트 없이 alt="")</label>
+          </div>
+          <div class="nv-modal__foot"><button type="button" class="nv-btn nv-btn--outline" data-pub-href="menu-edit-source.html">취소</button><button type="button" class="nv-btn nv-btn--primary" data-pub-href="menu-edit-source-image-alt.html">넣기</button></div>
         </div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:1rem">
-          <div class="card-title">버전 이력 <span class="nv-badge">2</span></div>
-          <table class="nv-table ver-table"><thead><tr><th scope="col">버전</th><th scope="col">상태</th><th scope="col">작업</th></tr></thead><tbody>
-            
-            <tr><td class="nv-mono">v2</td><td><span class="nv-badge nv-badge--primary">게시중</span><div class="nv-text-xs nv-text-subtle">2026-10-24 16:05 · 김지원</div></td>
-              <td><span class="nv-row"><button type="button" class="nv-btn nv-btn--sm nv-btn--icon nv-btn--outline" data-verprev="2" aria-label="v2 미리보기" data-tip="미리보기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-eye"></use></svg></button></span></td></tr><tr><td class="nv-mono">v1</td><td><span class="nv-badge ">구버전</span><div class="nv-text-xs nv-text-subtle">2026-10-12 10:20 · 김지원</div></td>
-              <td><span class="nv-row"><button type="button" class="nv-btn nv-btn--sm nv-btn--icon nv-btn--outline" data-verprev="1" aria-label="v1 미리보기" data-tip="미리보기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-eye"></use></svg></button><button type="button" class="nv-btn nv-btn--sm nv-btn--icon nv-btn--outline" data-verback="1" aria-label="v1 으로 되돌리기" data-tip="이 본문으로 되돌리기(임시저장)"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-redo"></use></svg></button></span></td></tr>
-          </tbody></table>
-          <p class="nv-text-xs nv-text-subtle">게시·검토 기록이 있는 버전은 기록으로 남아 지울 수 없습니다.</p>
-        </div>
-        <dl class="kv"><dt>Content ID</dt><dd class="nv-mono">CTd2b9946e99b04dadaa3d6baa46cf8271</dd><dt>발행 버전</dt><dd>v2 · 2026-10-24 16:05</dd></dl>
       </div>
-    </div>
-    <div class="savebar" id="src-bar" data-clean="true">
-      <span class="savebar__count">저장된 상태입니다</span>
-      
-      
-      <div class="savebar__actions"><button type="button" class="nv-btn nv-btn--outline" data-edmode="preview">미리보기</button><button type="button" class="nv-btn nv-btn--outline" data-soon="">html 내려받기</button><button type="button" class="nv-btn nv-btn--outline" id="src-draft" data-tip="고친 내용을 비공개 초안으로 저장합니다. 누리집은 이전 게시본 그대로입니다">임시저장</button><button type="button" class="nv-btn nv-btn--primary" id="src-save" disabled="">수정하기</button></div>
-      
-    </div></div>
-  </div></div>
-
-      <!-- 화면 2: 게시판 (목록 → 게시판명 → [게시판 정보 | 권한]) -->
-      
-      
-      
-      
+      </div>
     </main>
     <footer class="nv-footer"><span>© 2026 누리지음CMS Core. All rights reserved.</span></footer>
   </div>
-</div><div class="pub-modal-backdrop"><div class="pub-modal" role="dialog" aria-modal="true" aria-labelledby="im-t"><h2 id="im-t">이미지 삽입</h2>
-    <label class="nv-field"><span class="nv-field__label">넣을 그림</span><select class="nv-select" id="im-src"><option value="/images/sedis/sub03/survey-chart.png" selected="">조사 구성 그림 — /images/sedis/sub03/survey-chart.png</option><option value="/images/sedis/sub03/survey-cycle.png">조사 주기 그림 — /images/sedis/sub03/survey-cycle.png</option><option value="/images/sedis/common/logo-nise.png">기관 로고 — /images/sedis/common/logo-nise.png</option></select></label>
-    <label class="nv-field"><span class="nv-field__label">대체 텍스트 (그림의 내용 · 뜻)</span><input class="nv-input" id="im-alt" placeholder="예: 특수교육 실태조사 8종 조사 구성도"><span class="nv-field__err" id="im-err" role="alert"></span></label>
-    <label class="nv-check"><input type="checkbox" id="im-deco">꾸밈용 그림(대체 텍스트 없이 alt="")</label>
-    <div class="pub-modal__foot"><button type="button" class="nv-btn nv-btn--outline" data-m="no" data-pub-href="menu-edit-source.html">취소</button><button type="button" class="nv-btn nv-btn--primary" data-m="ok" data-pub-href="menu-edit-source.html">넣기</button></div></div></div>
+</div>
 <div id="toast-root"></div>
 </div>
 </body>
