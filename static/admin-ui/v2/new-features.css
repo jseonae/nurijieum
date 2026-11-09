@@ -722,10 +722,10 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
 .acc-scroll { overflow: visible; }
 .acc-list tr.is-locked td { background: var(--cms-err-bg); }
 .gcell { position: relative; display: inline-flex; align-items: center; gap: .4rem; }
-.pencil { display: inline-flex; align-items: center; justify-content: center; width: 2.6rem; height: 2.6rem; border: 0; border-radius: var(--cms-radius-xs); background: none; color: var(--cms-subtle); cursor: pointer; }
-.pencil:hover, .pencil[aria-expanded="true"] { background: var(--cms-surface-muted); color: var(--cms-primary-text); }
+.pencil { display: inline-flex; align-items: center; height: 2.6rem; padding: 0 .8rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius-xs); background: var(--cms-surface); color: var(--cms-muted); font: inherit; font-size: var(--cms-fs-sm); font-weight: var(--cms-fw-medium); white-space: nowrap; cursor: pointer; }
+.pencil:hover, .pencil[aria-expanded="true"] { border-color: var(--cms-primary); color: var(--cms-primary-text); }
 .pencil:focus-visible { box-shadow: var(--cms-focus); outline: 0; }
-.pencil .nv-icon { width: 1.4rem; height: 1.4rem; }
+.gcell { gap: .8rem; }
 .gcell .checkpop { white-space: normal; }
 
 .addpanel { gap: 1.6rem; }
