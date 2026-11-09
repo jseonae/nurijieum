@@ -858,16 +858,3 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
 .multimodal__right .nv-field { display: flex; flex-direction: column; gap: .6rem; }
 .gmem.is-added { background: var(--cms-surface-soft); }
 @media (max-width: 1024px) { .multimodal__body { grid-template-columns: minmax(0, 1fr); overflow-y: auto; } .multimodal__right { border-left: 0; border-top: 1px solid var(--cms-border); } }
-
-/* 표 바깥 테두리 — 피그마 09 · 10 · 11 · 13 · 16(권한 · 접속기록 목록). 01 · 14 · 15(메뉴 · 게시판 목록)는 테두리 없음 */
-:is(.auth-body, .roster-main, .nv-list) > .tbl-scroll { border: 1px solid var(--cms-border); border-radius: var(--cms-radius); }
-:is(.auth-body, .roster-main, .nv-list) > .tbl-scroll > .nv-table thead th:first-child { border-top-left-radius: calc(var(--cms-radius) - 1px); }
-:is(.auth-body, .roster-main, .nv-list) > .tbl-scroll > .nv-table thead th:last-child { border-top-right-radius: calc(var(--cms-radius) - 1px); }
-:is(.auth-body, .roster-main, .nv-list) > .tbl-scroll > .nv-table tbody tr:last-child td { border-bottom: 0; }
-:is(.auth-body, .roster-main, .nv-list) > .tbl-scroll > .nv-table tbody tr:last-child td:first-child { border-bottom-left-radius: calc(var(--cms-radius) - 1px); }
-:is(.auth-body, .roster-main, .nv-list) > .tbl-scroll > .nv-table tbody tr:last-child td:last-child { border-bottom-right-radius: calc(var(--cms-radius) - 1px); }
-:is(.auth-body, .nv-list) > .tbl-scroll { margin: 0 2.4rem; }
-.auth-body > .edx-hint { padding: 0 2.4rem 2.4rem; }
-.nv-list > .tbl-scroll + .list-foot { padding-top: 1.2rem; }
-@media (max-width: 1024px) { :is(.auth-body, .nv-list) > .tbl-scroll { margin: 0 1.6rem; } .auth-body > .edx-hint { padding: 0 1.6rem 1.6rem; } }
-@media (min-width: 1280px) { .acc-scroll > .nv-table { min-width: 0 !important; } }
