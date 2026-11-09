@@ -681,3 +681,10 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
 .acc-table th.ptable__who, .acc-table td.ptable__who { width: 38%; }
 .findmodal { width: min(108rem, 100%); }
 .findtable td { padding: 0 1rem; }
+
+/* ── 개선 3단계: 게시판 수정(2026-11-09) — 2단계 틀(.edx)을 그대로 쓰고 몇 가지만 더한다 */
+.edx-steps button:disabled { color: var(--cms-placeholder); background: none; cursor: not-allowed; }
+.menu-chip { display: inline-flex; align-items: center; gap: .6rem; height: 4rem; padding: 0 1.2rem; border: 1px solid var(--cms-border); border-radius: var(--cms-radius-sm); color: var(--cms-primary-text); font-size: var(--cms-fs-md); font-weight: var(--cms-fw-semibold); text-decoration: none; }
+.menu-chip small { color: var(--cms-subtle); font-weight: var(--cms-fw-regular); }
+.menu-chip .nv-icon { width: 1.4rem; height: 1.4rem; }
+.menu-chip:hover { border-color: var(--cms-primary); background: var(--cms-primary-soft); }

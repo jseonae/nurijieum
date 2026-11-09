@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- 화면: 게시판 관리 — 수정 — 게시판 정보 탭
+     피그마 12 「B-I1 게시판 정보(저장됨)」
      반영 위치: templates/admin-v2/pages/board-management.html
      목데이터 화면이다. 저장·조회는 동작하지 않는다. -->
 <html lang="ko" data-theme="nuri">
@@ -53,61 +54,55 @@
     </header>
 
     <main class="nv-content" id="content">
-      <!-- 화면 1·3: 메뉴 관리 / 관리자 메뉴 관리 (목록 → 메뉴명 누르면 나무 + [메뉴 정보 | 권한]) -->
-      
-
-      <!-- 화면 2: 게시판 (목록 → 게시판명 → [게시판 정보 | 권한]) -->
-      <div id="screen-board" class="nv-stack" style="gap:2.4rem"><div class="ed-page is-entering">
-    <div class="nv-editor-header edh">
-      <div class="edh__row">
-        <button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__back" data-tolist="" data-pub-href="board-list.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-arrow-left"></use></svg>목록으로</button>
-        <ol class="nv-breadcrumb edh__crumb" aria-label="위치"><li>사이트 관리</li><li>게시판 관리</li></ol>
-        <span class="edh__nav"><button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__step" data-dir="next" data-board="b-survey">다음: 실태조사<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg></button></span>
+      <div id="screen-board" class="edx">
+    <div class="edx-top">
+      <div class="nv-editor-header">
+        <button type="button" class="edx-back" data-tolist="" data-pub-href="board-list.html" aria-label="게시판 목록으로" data-tip="게시판 목록으로"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-arrow-left"></use></svg></button>
+        <p class="edx-kind">게시판 수정</p>
+        <div class="savehead"><span class="savehead__status">저장된 상태입니다</span><button type="button" class="nv-btn nv-btn--outline" id="btn-revert" disabled="">되돌리기</button><button type="button" class="nv-btn nv-btn--primary" id="btn-save" disabled="">게시판 정보 저장</button></div>
       </div>
-      <div class="edh__row edh__row--title"><span class="edh__kind">게시판 수정</span><h1 class="edh__name">공지사항</h1><span class="edh__badges"><span class="nv-badge nv-badge--info" data-tip="게시판 유형">NOTICE</span><code class="mhead__path" data-tip="게시판 코드 — 바꿀 수 없음">NOTICE</code>
-      <button type="button" class="nv-badge nv-badge--outline badge-link" data-gomenu="s32" data-tip="연결한 메뉴 — 누르면 메뉴관리에서 엽니다">메뉴: 알림마당 › 공지사항</button></span></div>
     </div>
-    <div class="nv-tabs nv-tabs--auto gtabs ed-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="mt-info" aria-controls="mt-panel" aria-selected="true" data-mtab="info" data-tip="게시판 이름 · 유형 · 답변 · 공지 · 첨부를 고칩니다. 「수정하기」를 누르면 사유와 함께 수정 이력에 남습니다." data-pub-href="board-edit-info.html"><span class="tab__l">게시판 정보<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-perm" aria-controls="mt-panel" aria-selected="false" data-mtab="perm" data-tip="이 게시판을 누리집에서 누가 볼 수 있고, 누가 맡아 관리하는지 정합니다. 연결한 메뉴의 접근권한과 같은 것입니다." data-pub-href="board-edit-access.html"><span class="tab__l">접근권한<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-hist" aria-controls="mt-panel" aria-selected="false" data-mtab="hist" data-tip="이 게시판을 언제, 누가, 왜 고쳤는지 봅니다. 기록은 고치거나 지울 수 없습니다." data-pub-href="board-edit-history.html"><span class="tab__l">수정 이력<span class="tab__dot"></span></span></button></div>
-    <div id="mt-panel" role="tabpanel" aria-labelledby="mt-info" class="nv-stack" style="gap:2.4rem"><form class="nv-nav-form__grid info-grid" id="binfo-form" novalidate="">
-      <div class="nv-card nv-card--pad nv-stack">
-        <div class="nv-field"><label for="bf-name" class="nv-field__label">게시판명 <span class="req" aria-hidden="true">*</span></label><input id="bf-name" class="nv-input" data-bf="name" value="공지사항" maxlength="200"></div>
-        <div class="nv-field"><span class="nv-field__label">게시판 코드</span><span class="ro-val nv-mono">NOTICE</span><span class="nv-field__hint">코드는 변경할 수 없습니다.</span></div>
-        <div class="nv-field"><label for="bf-type" class="nv-field__label">게시판 유형 <span class="req" aria-hidden="true">*</span></label><select id="bf-type" class="nv-select" data-bf="type"><option>GENERAL</option><option selected="">NOTICE</option><option>DATA</option><option>GALLERY</option><option>FAQ</option><option>QNA</option><option>VIDEO</option></select></div>
-        <div class="nv-field"><span class="nv-field__label">연결 메뉴</span>
-          <span class="nv-row nv-row--wrap"><button type="button" class="nv-btn nv-btn--sm nv-btn--outline" data-gomenu="s32">알림마당 › 공지사항 <code class="nv-mono">sub03_02</code></button></span></div>
-      </div>
-      <div class="nv-stack">
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="bf-active-label">사용여부</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-active" data-bf="active" checked="" aria-labelledby="bf-active-label" aria-describedby="bf-active-hint"></label></div>
-      <span class="nv-field__hint" id="bf-active-hint">끄면 누리집과 콘솔 목록에서 이 게시판을 쓰지 않습니다.</span></div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="bf-reply-label">답변 사용</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-reply" data-bf="reply" aria-labelledby="bf-reply-label" aria-describedby="bf-reply-hint"></label></div>
-      <span class="nv-field__hint" id="bf-reply-hint">켜면 글에 답변을 달 수 있습니다. 누가 답할지는 「접근권한 › 답변」 칸(당진 「답변」)이 정합니다.</span></div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="bf-notice-label">공지 사용</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-notice" data-bf="notice" checked="" aria-labelledby="bf-notice-label" aria-describedby="bf-notice-hint"></label></div>
-      <span class="nv-field__hint" id="bf-notice-hint">켜면 글을 공지로 목록 위에 고정할 수 있습니다(당진 게시판 「공지」).</span></div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-          <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="bf-attach-label">첨부파일 허용</span><label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-attach" data-bf="attach" checked="" aria-labelledby="bf-attach-label"></label></div>
-          <label for="bf-max" class="nv-sr-only">최대 첨부 개수</label>
-          <select id="bf-max" class="nv-select" data-bf="max"><option value="">최대 첨부 개수 — 제한 없음</option><option value="1">1개</option><option value="3">3개</option><option value="5">5개</option><option value="10">10개</option><option value="20" selected="">20개</option></select>
-          <span class="nv-field__hint">끄면 글 화면에 첨부 칸이 없고 올리기도 막힙니다.</span>
+    <section class="edx-card" aria-labelledby="edx-name">
+      <div class="edx-card__head">
+        <div class="edx-card__id">
+          <ol class="nv-breadcrumb" aria-label="위치"><li>사이트 관리</li><li>게시판 관리</li></ol>
+          <div class="edx-card__title"><h1 class="edx-card__name" id="edx-name">공지사항</h1><span class="nv-badge">NOTICE</span><span class="nv-badge nv-badge--primary">사용</span></div>
+        </div>
+        <div class="edx-card__tools">
+          <a class="edx-site" href="#" data-soon="">누리집에서 보기<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-external"></use></svg></a>
+          <span class="edx-steps"><button type="button" data-dir="prev" disabled=""><svg class="nv-icon flip" aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg>이전 없음</button><button type="button" data-dir="next" data-board="b-survey">다음: 실태조사<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg></button></span>
         </div>
       </div>
-    </form>
-    <div class="savebar" id="binfo-bar" data-clean="true">
-      <span class="savebar__count">저장된 상태입니다</span>
-      
-      
-      <div class="savebar__actions"><button type="button" class="nv-btn nv-btn--muted" id="binfo-cancel" disabled="">취소</button><button type="button" class="nv-btn nv-btn--primary" id="binfo-save" disabled="">수정하기</button></div>
-      
-    </div></div>
-  </div></div>
-      
-      
-      
+      <div class="nv-tabs nv-tabs--auto gtabs ed-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="mt-info" aria-controls="mt-panel" aria-selected="true" data-mtab="info" data-pub-href="board-edit-info.html">게시판 정보</button><button type="button" role="tab" id="mt-perm" aria-controls="mt-panel" aria-selected="false" data-mtab="perm" data-pub-href="board-edit-access.html">접근권한</button><button type="button" role="tab" id="mt-hist" aria-controls="mt-panel" aria-selected="false" data-mtab="hist" data-pub-href="board-edit-history.html">수정 이력</button></div>
+      <form id="mt-panel" role="tabpanel" aria-labelledby="mt-info" class="edx-body" novalidate="">
+        <div class="edx-main">
+          <section class="edx-sec" aria-labelledby="sec-basic"><h2 class="edx-sec__title" id="sec-basic">기본 정보</h2>
+            <div class="nv-field"><label for="bf-name" class="nv-field__label">게시판명 <span class="req" aria-hidden="true">*</span></label><input id="bf-name" class="nv-input" data-bf="name" value="공지사항" maxlength="200"></div>
+            <div class="nv-field"><span class="nv-field__label">게시판 코드</span><span class="ro-val">NOTICE</span><span class="nv-field__hint">코드는 바꿀 수 없습니다.</span></div>
+            <div class="nv-field"><label for="bf-type" class="nv-field__label">게시판 유형 <span class="req" aria-hidden="true">*</span></label><select id="bf-type" class="nv-select" data-bf="type"><option>GENERAL</option><option selected="">NOTICE</option><option>DATA</option><option>GALLERY</option><option>FAQ</option><option>QNA</option><option>VIDEO</option></select></div>
+            <div class="nv-field"><span class="nv-field__label">연결 메뉴</span>
+              <span><a class="menu-chip" href="#" data-gomenu="s32" data-pub-href="menu-edit-access-board.html">알림마당 › 공지사항 <small>sub03_02</small><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-external"></use></svg></a></span>
+              <span class="nv-field__hint">이 게시판은 연결 메뉴와 접근권한을 함께 씁니다. 메뉴관리에서 메뉴 유형 · 주소를 바꿉니다.</span></div>
+          </section>
+        </div>
+        <aside class="edx-side" aria-labelledby="side-title">
+          <h2 class="edx-side__title" id="side-title">게시판 설정</h2>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="bf-active-label">사용여부</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-active" data-f="-active" checked="" aria-labelledby="bf-active-label" aria-describedby="bf-active-hint"></label></div>
+            <span class="nv-field__hint" id="bf-active-hint">끄면 누리집과 콘솔 목록에서 이 게시판을 쓰지 않습니다.</span></div>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="bf-reply-label">답변 사용</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-reply" data-f="-reply" aria-labelledby="bf-reply-label" aria-describedby="bf-reply-hint"></label></div>
+            <span class="nv-field__hint" id="bf-reply-hint">켜면 글에 답변을 달 수 있습니다. 누가 답할지는 접근권한 탭의 「답변」 칸이 정합니다.</span></div>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="bf-notice-label">공지 사용</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-notice" data-f="-notice" checked="" aria-labelledby="bf-notice-label" aria-describedby="bf-notice-hint"></label></div>
+            <span class="nv-field__hint" id="bf-notice-hint">켜면 글을 공지로 목록 위에 고정할 수 있습니다.</span></div>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="bf-attach-label">첨부파일 허용</span><label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="bf-attach" data-bf="attach" checked="" aria-labelledby="bf-attach-label" aria-describedby="bf-attach-hint"></label></div>
+            <label for="bf-max" class="nv-sr-only">최대 첨부 개수</label><select id="bf-max" class="nv-select" data-bf="max"><option value="">제한 없음</option><option value="1">1개</option><option value="3">3개</option><option value="5">5개</option><option value="10">10개</option><option value="20" selected="">20개</option></select>
+            <span class="nv-field__hint" id="bf-attach-hint">끄면 글 화면에 첨부 칸이 없고 올리기도 막힙니다.</span></div>
+        </aside>
+      </form>
+    </section>
+      </div>
     </main>
     <footer class="nv-footer"><span>© 2026 누리지음CMS Core. All rights reserved.</span></footer>
   </div>
