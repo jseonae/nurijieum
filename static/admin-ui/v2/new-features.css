@@ -810,3 +810,15 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
 .kindpick__opt span { display: flex; flex-direction: column; }
 .kindpick__opt small { color: var(--cms-subtle); font-size: var(--cms-fs-xs); }
 .gp2 .roster-add .pick__list { left: 0; right: 0; }
+
+/* ── 개선 6단계: 남은 목록 화면(2026-11-09) — 피그마 13 · 14 · 15 · 16. 메뉴 목록과 같은 필터 · 칩 · ⋮ · 쪽 번호 */
+.list-chips { padding: 2rem 2.4rem 0; }
+.list-note { margin: 0; }
+.list2 td.is-wrap { white-space: normal; }
+.list2 tbody tr.is-hover td { background: var(--cms-surface-muted); }
+.csvmodal .nv-modal__head { padding: 3.2rem 3.2rem 0; }
+.csvmodal .nv-modal__body { padding: 2rem 3.2rem .8rem; font-size: var(--cms-fs-base); line-height: var(--cms-lh-base); }
+.csvmodal .nv-modal__body .nv-field { display: flex; flex-direction: column; gap: .6rem; }
+.csvmodal .nv-modal__foot { padding: 1.6rem 3.2rem 3.2rem; }
+.list2 .menu-link { color: var(--cms-text-strong); }
+.list2 .menu-link:hover { color: var(--cms-primary-text); }
