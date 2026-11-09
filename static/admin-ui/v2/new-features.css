@@ -822,3 +822,39 @@ tr.is-gone td { color: var(--cms-subtle); background: var(--cms-surface-alt); }
 .csvmodal .nv-modal__foot { padding: 1.6rem 3.2rem 3.2rem; }
 .list2 .menu-link { color: var(--cms-text-strong); }
 .list2 .menu-link:hover { color: var(--cms-primary-text); }
+
+/* ── 개선 5단계: 여러 명 고르기 모달(제안, 피그마 07) — 왼쪽 조직도 · 검색, 오른쪽 고른 것 · 기간 */
+.multimodal { width: min(96rem, 100%); }
+.multimodal .nv-modal__head { display: flex; align-items: flex-start; gap: 1.6rem; padding: 2.8rem 2.8rem 2rem; border-bottom: 1px solid var(--cms-border); }
+.multimodal .nv-modal__head > div { flex: 1; }
+.multimodal__body { display: grid; grid-template-columns: minmax(0, 1fr) 32rem; min-height: 0; flex: 1; overflow: hidden; }
+.multimodal__left { display: flex; flex-direction: column; gap: 1.2rem; min-height: 0; padding: 2rem 2.4rem; overflow-y: auto; }
+.multimodal__right { display: flex; flex-direction: column; gap: 1.2rem; padding: 2rem 2.4rem; border-left: 1px solid var(--cms-border); background: var(--cms-surface-soft); }
+.multimodal .nv-modal__foot { padding: 1.6rem 2.8rem 2.4rem; border-top: 1px solid var(--cms-border); }
+.mtree2 { margin: 0; padding: 0; list-style: none; border: 1px solid var(--cms-border); border-radius: var(--cms-radius); max-height: 44rem; overflow-y: auto; }
+.mtree2__row { display: flex; align-items: center; gap: .8rem; min-height: 4.4rem; padding: 0 1.2rem 0 calc(1.2rem + var(--d, 0) * 2.4rem); border-bottom: 1px solid var(--cms-border-soft); font-size: var(--cms-fs-md); }
+.mtree2__row:last-child { border-bottom: 0; }
+.mtree2__row.is-on { background: var(--cms-primary-soft); }
+.mtree2__row.is-dis { color: var(--cms-placeholder); }
+.mtree2__row > .nv-icon { flex: none; width: 1.4rem; height: 1.4rem; color: var(--cms-subtle); }
+.mtree2__chev { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; padding: 0; border: 0; background: none; color: var(--cms-muted); cursor: pointer; }
+.mtree2__chev[aria-expanded="true"] .nv-icon { transform: rotate(90deg); }
+.mtree2__chev .nv-icon { width: 1.2rem; height: 1.2rem; }
+.mtree2__name { color: var(--cms-text-strong); font-weight: var(--cms-fw-semibold); }
+.mtree2__row.is-dis .mtree2__name { color: var(--cms-placeholder); font-weight: var(--cms-fw-regular); }
+.mtree2__meta { margin-left: auto; color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.mtree2__meta + .nv-badge { margin-left: .4rem; }
+.mtree2__row.is-imp .nv-check input { background: var(--cms-primary-tint); border-color: var(--cms-primary-tint) !important; }
+.mtree2__row.is-mix .nv-check input { position: relative; background: var(--cms-primary); border-color: var(--cms-primary) !important; }
+.mtree2__row.is-mix .nv-check input::after { content: ""; position: absolute; left: 50%; top: 50%; width: .9rem; height: 2px; background: var(--cms-on-primary); transform: translate(-50%, -50%); }
+.mres__head, .mpick__head { display: flex; align-items: center; justify-content: space-between; gap: .8rem; font-size: var(--cms-fs-md); }
+.mres__head b, .mpick__head b { color: var(--cms-primary-text); }
+.mpick { flex: 1; margin: 0; padding: 0; list-style: none; border: 1px solid var(--cms-border); border-radius: var(--cms-radius); background: var(--cms-surface); overflow-y: auto; }
+.mpick__row { display: flex; align-items: center; gap: .8rem; padding: 1rem 1.2rem; border-bottom: 1px solid var(--cms-border-soft); }
+.mpick__row:last-child { border-bottom: 0; }
+.mpick__row > .nv-icon { flex: none; width: 1.6rem; height: 1.6rem; color: var(--cms-subtle); }
+.mpick__who { flex: 1; min-width: 0; display: flex; flex-direction: column; font-size: var(--cms-fs-md); }
+.mpick__who span { color: var(--cms-subtle); font-size: var(--cms-fs-sm); }
+.multimodal__right .nv-field { display: flex; flex-direction: column; gap: .6rem; }
+.gmem.is-added { background: var(--cms-surface-soft); }
+@media (max-width: 1024px) { .multimodal__body { grid-template-columns: minmax(0, 1fr); overflow-y: auto; } .multimodal__right { border-left: 0; border-top: 1px solid var(--cms-border); } }
