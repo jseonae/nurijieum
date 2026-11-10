@@ -144,6 +144,8 @@
   --cms-chart-attention-b: var(--krds-color-light-warning-20, #ffd08a);
   --cms-chart-track:       var(--krds-color-light-gray-20, #e6e8ea);
   --cms-live-dot: #00ffab;                                      /* 실측: 헤더 알림 점 */
+  --cms-change-dot:    var(--krds-color-light-warning-40, #e08a00); /* 개선(2026-11): 저장 안 한 항목·탭 점 */
+  --cms-change-border: var(--krds-color-light-warning-20, #f2d48a); /* 개선(2026-11): 사유 입력 줄 테두리 */
 
   /* ---- 형태 ---- */
   --cms-radius-xs: .4rem;    /* 4  배지·페이지 번호·select */

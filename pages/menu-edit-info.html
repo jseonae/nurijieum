@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <!-- 화면: 메뉴관리 — 수정 — 메뉴 정보 탭
+     피그마 01 「02-B 메뉴 정보 탭(카드형)」 · 03 「02-B6 담당자 지정됨」
      반영 위치: templates/admin-v2/pages/navigation-management.html
      목데이터 화면이다. 저장·조회는 동작하지 않는다. -->
 <html lang="ko" data-theme="nuri">
@@ -53,98 +54,78 @@
     </header>
 
     <main class="nv-content" id="content">
-      <!-- 화면 1·3: 메뉴 관리 / 관리자 메뉴 관리 (목록 → 메뉴명 누르면 나무 + [메뉴 정보 | 권한]) -->
-      <div id="screen-menu" class="nv-stack" style="gap:2.4rem"><div class="ed-page is-entering">
-    <div class="nv-editor-header edh">
-      <div class="edh__row">
-        <button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__back" data-tolist="" data-pub-href="menu-list.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-arrow-left"></use></svg>목록으로</button>
-        <ol class="nv-breadcrumb edh__crumb" aria-label="위치"><li>사이트 관리</li><li>메뉴관리</li><li>알림마당</li></ol>
-        <span class="edh__nav"><button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__step" data-dir="prev" data-menu="s3"><svg class="nv-icon flip" aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg>이전: 알림마당</button><button type="button" class="nv-btn nv-btn--sm nv-btn--outline edh__step" data-dir="next" data-menu="s32">다음: 공지사항<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg></button></span>
+      <div id="screen-menu" class="edx">
+    <div class="edx-top">
+      <div class="nv-editor-header">
+        <button type="button" class="edx-back" data-tolist="" data-pub-href="menu-list.html" aria-label="메뉴 목록으로" data-tip="메뉴 목록으로"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-arrow-left"></use></svg></button>
+        <p class="edx-kind">메뉴 수정</p>
+        <div class="savehead"><span class="savehead__status">저장된 상태입니다</span><button type="button" class="nv-btn nv-btn--outline" id="btn-revert" disabled="">되돌리기</button><button type="button" class="nv-btn nv-btn--primary" id="btn-save" disabled="">메뉴 정보 저장</button></div>
       </div>
-      <div class="edh__row edh__row--title"><span class="edh__kind">메뉴 수정</span><h1 class="edh__name">조사개요</h1><span class="edh__badges"><span class="nv-badge nv-badge--info" data-tip="HTML — 국특원 메뉴구조 서식 「유형」의 HTML. 콘텐츠를 보여 주고 「소스 수정」 탭에서 고칩니다(당진 「게시판 사용여부」 html)">HTML</span>
-      
-      
-      <span class="nv-badge nv-badge--outline" data-tip="연결한 콘텐츠 — 「소스 수정」 탭에서 고칩니다">콘텐츠: 조사개요</span>
-      <code class="mhead__path" data-tip="메뉴코드 — 국특원 메뉴구조 서식 열 이름. 값은 전자정부 방식 sub01_01(10/19 결정)">sub03_01</code><span class="mhead__path" data-tip="링크URL — 방문자가 여는 주소(공개 화면 앞에 /public)">/public/survey-overview</span></span></div>
     </div>
-    <div class="nv-tabs nv-tabs--auto gtabs ed-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="mt-info" aria-controls="mt-panel" aria-selected="true" data-mtab="info" data-tip="이 메뉴의 이름 · 위치 · 연결 대상 · 담당자를 고칩니다. 「수정하기」를 누르면 사유와 함께 수정 이력에 남습니다." data-pub-href="menu-edit-info.html"><span class="tab__l">메뉴 정보<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-src" aria-controls="mt-panel" aria-selected="false" data-mtab="src" data-tip="이 메뉴가 보여 주는 화면 본문을 고칩니다. 「임시저장」은 비공개이고, 「수정하기」를 눌러야 누리집에 게시됩니다. · 누리지음 「콘텐츠 수정」 · 당진 「콘텐츠수정」" data-pub-href="menu-edit-source.html"><span class="tab__l">소스 수정<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-perm" aria-controls="mt-panel" aria-selected="false" data-mtab="perm" data-tip="이 메뉴를 누리집에서 누가 볼 수 있고, 누가 맡아 관리하는지 정합니다. 「저장」하면 사유와 함께 수정 이력에 남습니다. · 국특원 SFR-009 「접근권한을 세분화」 · 누리지음 「권한」" data-pub-href="menu-edit-access.html"><span class="tab__l">접근권한<span class="tab__dot"></span></span></button><button type="button" role="tab" id="mt-hist" aria-controls="mt-panel" aria-selected="false" data-mtab="hist" data-tip="이 메뉴를 언제, 누가, 왜 고쳤는지 봅니다. 기록은 고치거나 지울 수 없습니다. · 국특원 SFR-009 「수정 이력」 · 당진 「관리 히스토리」" data-pub-href="menu-edit-history.html"><span class="tab__l">수정 이력<span class="tab__dot"></span></span></button></div>
-    <div id="mt-panel" role="tabpanel" aria-labelledby="mt-info" class="nv-stack" style="gap:2.4rem"><form class="nv-nav-form__grid info-grid" id="info-form" novalidate="">
-      <div class="nv-stack">
-      <div class="nv-card nv-card--pad nv-stack">
-        <div class="card-title">기본 정보</div>
-        <div class="nv-field"><label for="f-name" class="nv-field__label">메뉴명 <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-name" class="nv-input" data-f="name" value="조사개요" placeholder="메뉴명을 입력하세요."></div>
-        <div class="field-2">
-          <div class="nv-field"><label for="f-code" class="nv-field__label" data-tip="메뉴코드 — 국특원 메뉴구조 서식 열 이름 · 당진 「메뉴 코드(MNO)」. 값은 sub01_01 꼴(10/19 결정)">메뉴코드 <span class="req" aria-hidden="true">*</span></label>
-            <input id="f-code" class="nv-input nv-mono" data-f="code" value="sub03_01" placeholder="예: sub01_01"></div>
-          <div class="nv-field"><span class="nv-field__label" data-tip="당진 「단계」 — 1단계 = 대메뉴. 상위 메뉴를 고르면 정해집니다">단계</span><span class="ro-val">2단계</span></div>
+    <section class="edx-card" aria-labelledby="edx-name">
+      <div class="edx-card__head">
+        <div class="edx-card__id">
+          <ol class="nv-breadcrumb" aria-label="위치"><li>사이트 관리</li><li>메뉴관리</li><li>알림마당</li></ol>
+          <div class="edx-card__title"><span class="lvl lvl--2" aria-label="2단계">2</span><h1 class="edx-card__name" id="edx-name">조사개요</h1><span class="nv-badge">HTML</span><span class="nv-badge nv-badge--primary">노출</span></div>
         </div>
-        <span class="nv-field__hint">메뉴코드는 상위 메뉴코드 아래(예: sub01 → sub01_NN)여야 합니다. 바꾸면 하위 메뉴코드도 함께 바뀝니다(링크URL은 그대로).</span>
-        <div class="nv-field"><label for="f-parent" class="nv-field__label">상위 메뉴 <span class="req" aria-hidden="true">*</span></label>
-          <select id="f-parent" class="nv-select" data-f="parent"><option value="">(최상위)</option><option value="s1">통계정보</option><option value="s11">통계정보 › 조사 변천사</option><option value="s12">통계정보 › 특수교육 현황</option><option value="s13">통계정보 › 시계열 시각화</option><option value="s14">통계정보 › 핵심데이터 시각화</option><option value="s2">데이터 분석</option><option value="s21">데이터 분석 › 교차분석</option><option value="s3" selected="">알림마당</option><option value="s32">알림마당 › 공지사항</option><option value="s33">알림마당 › 자료실</option><option value="s331">알림마당 › 자료실 › 실태조사</option><option value="s332">알림마당 › 자료실 › 종단연구</option><option value="s333">알림마당 › 자료실 › 특수교육통계</option><option value="s334">알림마당 › 자료실 › 기타</option><option value="s34">알림마당 › 홍보영상</option></select>
-          </div>
-      </div>
-      <div class="nv-card nv-card--pad nv-stack">
-        <div class="card-title">연결</div>
-        
-        <div class="nv-field"><label for="f-nt" class="nv-field__label" data-tip="메뉴 유형 — 국특원 메뉴구조 서식 「유형」(HTML/게시판/프로그램/외부연계). 당진은 「게시판 사용여부」라는 이름의 칸">메뉴 유형 <span class="req" aria-hidden="true">*</span></label>
-          <select id="f-nt" class="nv-select" data-f="nt"><option value="NONE">묶음 메뉴</option><option value="CONTENT" selected="">HTML (콘텐츠 선택)</option><option value="PAGE">HTML (페이지 ID)</option><option value="BOARD">게시판</option><option value="EXTENSION_PROGRAM">프로그램</option><option value="EXTERNAL_URL">외부연계</option></select></div>
-        <div class="nv-field"><label for="f-pathpick" class="nv-field__label" data-tip="링크URL — 당진 「링크URL」 · 누리지음 「주소」">링크URL</label>
-          <div class="nv-row nv-row--wrap">
-            <select id="f-lt" class="nv-select nv-nav-link-target" data-f="lt" aria-label="링크 타겟" data-tip="링크 타겟 — 당진의 script·iframe 은 보안·웹 접근성 때문에 뺐습니다"><option value="_self" selected="">현재창</option><option value="_blank">새창</option><option value="_popup">팝업창</option></select>
-            <span class="nv-row nv-grow"><select id="f-pathpick" class="nv-select nv-grow" data-f="pathpick"><option value="/survey-overview" selected="">/survey-overview</option><option value="__direct">직접입력</option></select>
-              </span>
-          </div>
-          <span class="nv-field__hint">방문자가 여는 주소입니다(공개 화면에서는 앞에 /public). 링크 타겟은 현재창 · 새창 · 팝업창입니다.</span></div>
-        <div class="nv-field"><span class="nv-field__label">연결 대상</span><span class="nv-route-target nv-stack" style="gap:.8rem"><span class="nv-row"><select class="nv-select nv-grow" id="f-target" data-f="target" aria-label="콘텐츠 선택"><option value="">콘텐츠 선택</option><option value="survey-overview" selected="">조사개요 (게시중 v2)</option><option value="promo-video">홍보영상 (게시중 v1)</option></select><button type="button" class="nv-btn nv-btn--outline" data-mtab="src" data-pub-href="menu-edit-source.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-code"></use></svg>소스 수정</button></span></span></div>
-      </div>
-      <div class="nv-card nv-card--pad nv-stack">
-        <div class="card-title" data-tip="당진 메뉴관리의 담당자 칸 — 누리집 화면 아래 「정보담당자」로 나오고, 내 담당 메뉴·관리자 권한에 자동으로 들어갑니다">담당자</div>
-        <div class="field-2">
-          <div class="nv-field"><span class="nv-field__label">담당자명</span>
-            <span class="nv-row"><span class="ro-val nv-grow">김지원 <small class="nv-mono">kimjw</small></span><button type="button" class="nv-btn nv-btn--outline" data-ownerpick=""><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-search"></use></svg>담당자 찾기</button><button type="button" class="nv-btn nv-btn--ghost" data-ownerclear="" aria-label="담당자 비우기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-close"></use></svg></button></span></div>
-          <div class="nv-field"><span class="nv-field__label">담당 부서</span><span class="ro-val">기획연구과</span></div>
-          <div class="nv-field"><span class="nv-field__label">담당자연락처</span><span class="ro-val nv-mono">041-000-1101</span></div>
-          <div class="nv-field"><span class="nv-field__label">담당자이메일</span><span class="ro-val">kimjw@example.go.kr</span></div>
+        <div class="edx-card__tools">
+          <a class="edx-site" href="#" data-soon="">누리집에서 보기<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-external"></use></svg></a>
+          <span class="edx-steps"><button type="button" data-dir="prev" data-menu="s3"><svg class="nv-icon flip" aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg>이전: 알림마당</button><button type="button" data-dir="next" data-menu="s32">다음: 공지사항<svg class="nv-icon " aria-hidden="true"><use href="#nv-i-chevron-right"></use></svg></button></span>
         </div>
-        
-        <span class="nv-field__hint">부서 · 연락처 · 이메일은 서브관리자 정보에서 옵니다. 담당자는 이 메뉴 「관리자 권한」에 자동으로 들어갑니다.</span>
       </div>
+      <div class="nv-tabs nv-tabs--auto gtabs ed-tabs" role="tablist" aria-label="설정"><button type="button" role="tab" id="mt-info" aria-controls="mt-panel" aria-selected="true" data-mtab="info" data-pub-href="menu-edit-info.html">메뉴 정보</button><button type="button" role="tab" id="mt-src" aria-controls="mt-panel" aria-selected="false" data-mtab="src" data-pub-href="menu-edit-source.html">소스 수정</button><button type="button" role="tab" id="mt-perm" aria-controls="mt-panel" aria-selected="false" data-mtab="perm" data-pub-href="menu-edit-access.html">접근권한</button><button type="button" role="tab" id="mt-hist" aria-controls="mt-panel" aria-selected="false" data-mtab="hist" data-pub-href="menu-edit-history.html">수정 이력</button></div>
+      <form id="mt-panel" role="tabpanel" aria-labelledby="mt-info" class="edx-body" novalidate="">
+        <div class="edx-main">
+          <section class="edx-sec" aria-labelledby="sec-basic"><h2 class="edx-sec__title" id="sec-basic">기본 정보</h2>
+            <div class="nv-field"><label for="f-name" class="nv-field__label">메뉴명 <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" class="nv-input" data-f="name" value="조사개요" placeholder="메뉴명을 입력하세요."></div>
+            <div class="field-2" style="grid-template-columns:minmax(0,1fr) 17.6rem">
+              <div class="nv-field"><label for="f-code" class="nv-field__label">메뉴코드 <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-code" class="nv-input" data-f="code" value="sub03_01" placeholder="예: sub01_01" aria-describedby="f-code-hint"></div>
+              <div class="nv-field"><span class="nv-field__label">단계</span><span class="ro-val">2단계</span></div>
+            </div>
+            <span class="nv-field__hint" id="f-code-hint">메뉴코드는 상위 메뉴코드 아래(예: sub01 → sub01_NN)여야 합니다. 바꾸면 하위 메뉴코드도 함께 바뀌고, 링크 URL은 그대로입니다.</span>
+            <div class="nv-field"><label for="f-parent" class="nv-field__label">상위 메뉴 <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-parent" class="nv-select" data-f="parent" aria-describedby="f-parent-hint"><option value="">(최상위)</option><option value="s1">통계정보</option><option value="s11">통계정보 › 조사 변천사</option><option value="s12">통계정보 › 특수교육 현황</option><option value="s13">통계정보 › 시계열 시각화</option><option value="s14">통계정보 › 핵심데이터 시각화</option><option value="s2">데이터 분석</option><option value="s21">데이터 분석 › 교차분석</option><option value="s3" selected="">알림마당</option><option value="s32">알림마당 › 공지사항</option><option value="s33">알림마당 › 자료실</option><option value="s34">알림마당 › 홍보영상</option></select>
+              <span class="nv-field__hint" id="f-parent-hint">고른 메뉴의 하위 메뉴가 됩니다. 단계는 상위 메뉴에 따라 정해집니다.</span></div>
+          </section>
+          <section class="edx-sec" aria-labelledby="sec-link"><h2 class="edx-sec__title" id="sec-link">연결</h2>
+            <div class="nv-field"><label for="f-nt" class="nv-field__label">메뉴 유형 <span class="req" aria-hidden="true">*</span></label>
+              <select id="f-nt" class="nv-select" data-f="nt"><option value="NONE">묶음 메뉴</option><option value="CONTENT" selected="">HTML (콘텐츠 선택)</option><option value="PAGE">HTML (페이지 ID)</option><option value="BOARD">게시판</option><option value="EXTENSION_PROGRAM">프로그램</option><option value="EXTERNAL_URL">외부연계</option></select></div>
+            <div class="nv-field"><label for="f-pathpick" class="nv-field__label">링크 URL <span class="req" aria-hidden="true">*</span></label>
+              <div class="nv-row">
+                <select id="f-lt" class="nv-select nv-nav-link-target" data-f="lt" aria-label="링크 타겟"><option value="_self" selected="">현재창</option><option value="_blank">새창</option><option value="_popup">팝업창</option></select>
+                <select id="f-pathpick" class="nv-select nv-grow" data-f="pathpick" aria-describedby="f-path-hint"><option value="/survey-overview" selected="">/survey-overview</option><option value="__direct">직접입력</option></select>
+              </div>
+              <span class="nv-field__hint" id="f-path-hint">방문자가 여는 주소입니다. 공개 화면에서는 앞에 /public이 붙습니다. 링크 타겟은 현재창 · 새창 · 팝업창 중에서 고릅니다.</span></div>
+            <div class="nv-field"><label for="f-target" class="nv-field__label">연결 대상 <span class="req" aria-hidden="true">*</span></label>
+              <div class="target-row"><select class="nv-select" id="f-target" data-f="target"><option value="">콘텐츠 선택</option><option value="survey-overview" selected="">조사개요 — 게시중 v2 · 2026-10-24 수정 · 김지원</option><option value="promo-video">홍보영상 — 게시중 v1 · 2026-10-12 수정 · 정유나</option></select>
+                <button type="button" class="nv-btn nv-btn--outline" data-mtab="src" data-pub-href="menu-edit-source.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-code"></use></svg>소스 수정</button><button type="button" class="nv-btn nv-btn--outline" data-soon=""><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-eye"></use></svg>미리보기</button></div></div>
+          </section>
+          <section class="edx-sec" aria-labelledby="sec-owner"><h2 class="edx-sec__title" id="sec-owner">담당자</h2>
+            <div class="field-2"><div class="nv-field"><span class="nv-field__label">담당자명</span><span class="owner-name"><span class="ro-val"><b>김지원</b><small class="nv-mono">kimjw</small></span><button type="button" class="nv-btn nv-btn--outline" data-ownerpick="" data-pub-href="menu-edit-info-owner-search.html"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-search"></use></svg>담당자 변경</button><button type="button" class="nv-btn nv-btn--outline owner-x" data-ownerclear="" data-pub-href="menu-edit-info-owner-empty.html" aria-label="담당자 비우기" data-tip="담당자 비우기"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-close"></use></svg></button></span></div><div class="nv-field"><span class="nv-field__label">담당 부서</span><span class="ro-val">기획연구과 · 교육연구사</span></div><div class="nv-field"><span class="nv-field__label">담당자연락처</span><span class="ro-val nv-mono">041-000-1101</span></div><div class="nv-field"><span class="nv-field__label">담당자이메일</span><span class="ro-val">kimjw@example.go.kr</span></div></div>
+            <p class="edx-hint"><svg class="nv-icon " aria-hidden="true"><use href="#nv-i-info"></use></svg>부서 · 연락처 · 이메일은 서브관리자 정보에서 옵니다. 담당자는 누리집 화면 아래 「정보담당자」로 보이고, 이 메뉴 「관리자 권한」에 자동으로 들어갑니다.</p>
+          </section>
+        </div>
+        <aside class="edx-side" aria-labelledby="side-title">
+          <h2 class="edx-side__title" id="side-title">표시 설정</h2>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="f-visible-label">노출여부</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-visible" data-f="visible" checked="" aria-labelledby="f-visible-label" aria-describedby="f-visible-hint"></label></div>
+            <span class="nv-field__hint" id="f-visible-hint">끄면 누리집 메뉴에 나오지 않습니다. 주소로 직접 들어오는 것은 접근권한 탭에서 막습니다.</span></div>
+          <div class="nv-field"><label for="f-sort" class="nv-field__label">출력순서</label><input id="f-sort" class="nv-input" type="number" data-f="sort" value="10" aria-describedby="f-sort-hint"><span class="nv-field__hint" id="f-sort-hint">숫자가 작을수록 앞에 나옵니다. 같은 단계 안에서만 비교합니다.</span></div>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="f-fb-label">이용자 만족도 조사</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-fb" data-f="fb" checked="" aria-labelledby="f-fb-label" aria-describedby="f-fb-hint"></label></div>
+            <span class="nv-field__hint" id="f-fb-hint">켜면 이 메뉴 화면 아래에 만족도 평가(5단계 + 의견)가 나옵니다. 결과는 「만족도 현황」에서 봅니다.</span></div>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="f-tabmenu-label">탭메뉴</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-tabmenu" data-f="tabmenu" aria-labelledby="f-tabmenu-label" aria-describedby="f-tabmenu-hint"></label></div>
+            <span class="nv-field__hint" id="f-tabmenu-hint">켜면 하위 메뉴를 이 메뉴 화면 위에 탭으로 보여 줍니다.</span></div>
+          <div class="edx-opt"><div class="edx-opt__row"><span class="nv-field__label" id="f-mymenu-label">나만의메뉴</span>
+            <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-mymenu" data-f="mymenu" aria-labelledby="f-mymenu-label" aria-describedby="f-mymenu-hint"></label></div>
+            <span class="nv-field__hint" id="f-mymenu-hint">이용자가 이 메뉴를 나만의메뉴에 추가할 수 있습니다.</span></div>
+        </aside>
+      </form>
+    </section>
       </div>
-      <div class="nv-stack">
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="f-visible-label">노출여부</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-visible" data-f="visible" checked="" aria-labelledby="f-visible-label" aria-describedby="f-visible-hint"></label></div>
-      <span class="nv-field__hint" id="f-visible-hint">끄면(비노출) 누리집 메뉴에 나오지 않습니다. 국특원 회의록 「일반 사용자에게는 메뉴 비노출」의 그 노출입니다.</span></div>
-        <div class="nv-card nv-card--pad"><div class="nv-field"><label for="f-sort" class="nv-field__label" data-tip="출력순서 — 당진 「출력순서」 · 누리지음 「정렬순서」">출력순서</label><input id="f-sort" class="nv-input" type="number" data-f="sort" value="10"><span class="nv-field__hint">숫자가 작을수록 앞에 나옵니다.</span></div></div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="f-fb-label">이용자 만족도 조사</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-fb" data-f="fb" checked="" aria-labelledby="f-fb-label" aria-describedby="f-fb-hint"></label></div>
-      <span class="nv-field__hint" id="f-fb-hint">켜면 이 메뉴 화면 아래에 만족도 평가(5단계 + 의견)가 나옵니다(국특원 SFR-006).</span></div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="f-tabmenu-label">탭메뉴</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-tabmenu" data-f="tabmenu" aria-labelledby="f-tabmenu-label" aria-describedby="f-tabmenu-hint"></label></div>
-      <span class="nv-field__hint" id="f-tabmenu-hint">켜면 하위 메뉴를 이 메뉴 화면 위에 탭으로 보여 줍니다(당진 「텝메뉴」).</span></div>
-        <div class="nv-card nv-card--pad nv-stack" style="gap:.8rem">
-      <div class="nv-field nv-field--row" style="justify-content:space-between"><span class="nv-field__label" id="f-mymenu-label">나만의메뉴</span>
-        <label class="nv-switch cms-admin-switch"><input type="checkbox" role="switch" id="f-mymenu" data-f="mymenu" aria-labelledby="f-mymenu-label" aria-describedby="f-mymenu-hint"></label></div>
-      <span class="nv-field__hint" id="f-mymenu-hint">켜면 이용자가 이 메뉴를 「나만의메뉴」(즐겨찾기)에 담을 수 있습니다(당진).</span></div>
-      </div>
-    </form>
-    <div class="savebar" id="info-bar" data-clean="true">
-      <span class="savebar__count">저장된 상태입니다</span>
-      
-      
-      <div class="savebar__actions"><button type="button" class="nv-btn nv-btn--muted" id="info-cancel" disabled="">취소</button><button type="button" class="nv-btn nv-btn--primary" id="info-save" disabled="">수정하기</button></div>
-      
-    </div></div>
-  </div></div>
-
-      <!-- 화면 2: 게시판 (목록 → 게시판명 → [게시판 정보 | 권한]) -->
-      
-      
-      
-      
     </main>
     <footer class="nv-footer"><span>© 2026 누리지음CMS Core. All rights reserved.</span></footer>
   </div>
